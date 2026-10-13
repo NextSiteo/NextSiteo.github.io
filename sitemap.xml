@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- URL SEGNAPOSTO: sostituire "https://NOMEUTENTE.github.io/NOMEREPO/" con l'indirizzo vero (vedi README, punto 7).
+<!-- INDIRIZZO DEL SITO: se cambiate dominio, sostituite "https://nextsiteo.github.io/" ovunque (vedi README, punto 7).
      Le demo non sono elencate perché hanno noindex. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://NOMEUTENTE.github.io/NOMEREPO/</loc>
+    <loc>https://nextsiteo.github.io/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://NOMEUTENTE.github.io/NOMEREPO/privacy.html</loc>
+    <loc>https://nextsiteo.github.io/privacy.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
