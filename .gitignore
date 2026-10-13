@@ -1,0 +1,5 @@
+# Design system generati con la skill UI UX Pro Max (solo per lo sviluppo, non vanno pubblicati)
+design-system/
+
+# Impostazioni locali di Claude Code: con .nojekyll GitHub Pages pubblicherebbe anche le cartelle col punto
+.claude/

@@ -4,35 +4,41 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Area allievi | Autoscuole Crocevia (demo di Next Siteo)</title>
-  <meta name="description" content="Area allievi dimostrativa: calendario per prenotare le guide nelle tre sedi, stato del percorso dalla teoria alla pratica. Dati finti, nessun dato inviato.">
+  <meta name="description" content="Area allievi dimostrativa: prenotazione delle guide nelle tre sedi in tre passi, guide prenotate con disdetta e stato del percorso dalla teoria all'esame. Dati finti, nessun dato inviato.">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#15171A">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
   <meta property="og:title" content="Area allievi | Autoscuole Crocevia (demo)">
   <meta property="og:description" content="Prenotazione delle guide e stato del percorso: un esempio di gestionale per autoscuole.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/overpass-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../comune/barra-demo.css">
   <link rel="stylesheet" href="css/style.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body class="page-app">
+  <!-- Icone: tratto in stile Lucide (licenza ISC), disegnate inline -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></symbol>
-    <symbol id="i-left" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6"/></symbol>
-    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.8v.1"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16.5" rx="2"/><path d="M3 10h18M8 2.5v4M16 2.5v4"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 8.5a2 2 0 0 0 0 7V18a1.5 1.5 0 0 0 1.5 1.5h15A1.5 1.5 0 0 0 21 18v-2.5a2 2 0 0 1 0-7V6a1.5 1.5 0 0 0-1.5-1.5h-15A1.5 1.5 0 0 0 3 6zM14 4.5v2M14 10.5v3M14 17.5v2"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="5" r="2.5"/><path d="M8.5 19H17a3.5 3.5 0 0 0 0-7H7a3.5 3.5 0 0 1 0-7h8.5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
   </svg>
 
   <a class="skip-link" href="#contenuto">Salta al contenuto</a>
 
   <header class="app-head">
     <div class="container app-head__bar">
-      <a class="brand" href="index.html" aria-label="Autoscuole Crocevia, torna al sito">
-        <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#0f766e"/><path d="M16 4v24M4 16h24" stroke="#fff" stroke-width="6"/><path d="M16 5.5v5M16 21.5v5M5.5 16h5M21.5 16h5" stroke="#0f766e" stroke-width="1.3"/></svg>
+      <a class="brand" href="index.html">
+        <svg viewBox="0 0 32 32" width="36" height="36" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="5" fill="#FFC928"/><path d="M16 4.5 29 27.5H3z" fill="#fff" stroke="#C8281E" stroke-width="3" stroke-linejoin="round"/><path d="M16 12.5v12M11 18.5h10" stroke="#15171A" stroke-width="2.8"/></svg>
         <span>Crocevia<small>Area allievi</small></span>
       </a>
-      <span class="user"><span class="user__avatar" aria-hidden="true">AP</span><span>Allievo di prova</span></span>
+      <span class="user"><span class="user__avatar" aria-hidden="true">AP</span><span class="user__name">Allievo di prova</span></span>
     </div>
   </header>
 
@@ -40,61 +46,83 @@
     <div class="container">
       <p class="notice" role="note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>Accesso di prova: allievo, guide e orari sono finti. Le prenotazioni restano solo in questa pagina e spariscono quando la chiudi.</span></p>
 
-      <div class="app__title">
-        <h1>Ciao! Ecco le tue guide</h1>
-        <p class="muted">Patente B · iscritto alla sede di Vallefinta</p>
+      <div class="app__top">
+        <div class="app__title">
+          <h1>Ciao! Ecco le tue guide</h1>
+          <p class="muted">Patente B, iscritto alla sede di Vallefinta</p>
+        </div>
+        <section class="next" aria-labelledby="next-title" data-next>
+          <h2 class="next__label" id="next-title">La tua prossima guida</h2>
+          <p class="next__when"><b>—</b><span>&nbsp;</span></p>
+          <p class="next__what"><strong>Caricamento…</strong><span>&nbsp;</span></p>
+        </section>
       </div>
 
       <div class="tabbar" role="tablist" aria-label="Sezioni dell'area allievi">
-        <button type="button" role="tab" id="t-prenota" aria-controls="p-prenota" aria-selected="true">Prenota</button>
-        <button type="button" role="tab" id="t-guide" aria-controls="p-guide" aria-selected="false" tabindex="-1">Le mie guide<span class="count" data-count>1</span></button>
-        <button type="button" role="tab" id="t-percorso" aria-controls="p-percorso" aria-selected="false" tabindex="-1">Il mio percorso</button>
+        <button type="button" role="tab" id="t-prenota" aria-controls="p-prenota" aria-selected="true" data-hash="prenota"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg><span>Prenota</span></button>
+        <button type="button" role="tab" id="t-guide" aria-controls="p-guide" aria-selected="false" tabindex="-1" data-hash="guide"><svg class="icon" aria-hidden="true"><use href="#i-ticket"/></svg><span>Le mie guide</span><span class="count" data-count aria-hidden="true">1</span><span class="sr-only" data-count-sr></span></button>
+        <button type="button" role="tab" id="t-percorso" aria-controls="p-percorso" aria-selected="false" tabindex="-1" data-hash="percorso"><svg class="icon" aria-hidden="true"><use href="#i-route"/></svg><span>Il mio percorso</span></button>
       </div>
 
-      <!-- Prenota -->
-      <section class="panel" role="tabpanel" id="p-prenota" aria-labelledby="t-prenota" tabindex="0">
-        <div class="card filters">
-          <div class="field">
-            <label for="sede">Sede</label>
-            <select id="sede" data-sede></select>
-          </div>
-          <div class="field">
-            <label for="tipo">Tipo di guida</label>
-            <select id="tipo" data-tipo></select>
-            <p class="field__hint">Le guide notturne si fanno solo la sera.</p>
+      <!-- ============ Prenota ============ -->
+      <section class="panel" role="tabpanel" id="p-prenota" aria-labelledby="t-prenota" tabindex="-1">
+        <ol class="steps" role="list" aria-label="Passi della prenotazione" data-steps>
+          <li class="is-done">Sede e tipo</li>
+          <li class="is-done">Giorno</li>
+          <li class="is-current" aria-current="step">Orario</li>
+        </ol>
+
+        <div class="card">
+          <h2 class="step-title"><span aria-hidden="true">1</span>Sede e tipo di guida</h2>
+          <div class="pick">
+            <fieldset>
+              <legend>Sede</legend>
+              <div class="options options--sedi" data-sedi></div>
+            </fieldset>
+            <fieldset>
+              <legend>Tipo di guida</legend>
+              <div class="seg" data-tipi></div>
+              <p class="field__hint">Le notturne si fanno solo la sera, dal lunedì al venerdì.</p>
+            </fieldset>
           </div>
         </div>
 
         <div class="card" id="calendario">
+          <h2 class="step-title"><span aria-hidden="true">2</span>Giorno</h2>
           <div class="week">
             <button type="button" class="icon-btn" data-week-prev aria-label="Settimana precedente"><svg class="icon" aria-hidden="true"><use href="#i-left"/></svg></button>
             <p class="week__label" data-week-label aria-live="polite"></p>
             <button type="button" class="icon-btn" data-week-next aria-label="Settimana successiva"><svg class="icon" aria-hidden="true"><use href="#i-right"/></svg></button>
           </div>
-          <div class="days" data-days role="group" aria-label="Giorno"></div>
-          <h2 class="sr-only" data-slots-title>Orari</h2>
-          <div class="slots" data-slots aria-live="polite"></div>
+          <div class="days" data-days role="group" aria-label="Giorni della settimana"></div>
+        </div>
+
+        <div class="card">
+          <h2 class="step-title"><span aria-hidden="true">3</span><span data-slots-title>Orario</span></h2>
+          <div class="slots" data-slots></div>
           <div class="legend" aria-hidden="true">
             <span><i></i> Libero</span>
             <span><i class="busy"></i> Occupato</span>
             <span><i class="mine"></i> La tua guida</span>
           </div>
+          <div aria-live="polite" data-booked></div>
         </div>
       </section>
 
-      <!-- Le mie guide -->
-      <section class="panel" role="tabpanel" id="p-guide" aria-labelledby="t-guide" tabindex="0" hidden>
+      <!-- ============ Le mie guide ============ -->
+      <section class="panel" role="tabpanel" id="p-guide" aria-labelledby="t-guide" tabindex="-1" hidden>
         <div class="card">
-          <h2 style="font-size:1.25rem;margin-bottom:12px">Guide prenotate</h2>
-          <ul class="bookings" role="list" data-bookings></ul>
+          <h2 style="margin-bottom:var(--s-4)">Guide prenotate</h2>
+          <div aria-live="polite" data-undo-live></div>
+          <ul class="bookings" role="list" data-bookings tabindex="-1"></ul>
         </div>
       </section>
 
-      <!-- Il mio percorso -->
-      <section class="panel" role="tabpanel" id="p-percorso" aria-labelledby="t-percorso" tabindex="0" hidden>
+      <!-- ============ Il mio percorso ============ -->
+      <section class="panel" role="tabpanel" id="p-percorso" aria-labelledby="t-percorso" tabindex="-1" hidden>
         <div class="summary" data-summary></div>
         <div class="card">
-          <h2 style="font-size:1.25rem;margin-bottom:16px">Dalla teoria alla pratica</h2>
+          <h2 style="margin-bottom:var(--s-5)">Dalla teoria all'esame</h2>
           <ol class="path" role="list" data-path></ol>
         </div>
       </section>
@@ -103,7 +131,7 @@
 
   <dialog data-confirm aria-labelledby="dlg-title">
     <form method="dialog">
-      <h2 id="dlg-title">Confermi la guida?</h2>
+      <div class="dialog__head"><h2 id="dlg-title">Confermi la guida?</h2></div>
       <dl data-confirm-list></dl>
       <div class="btn-row">
         <button class="btn" value="ok" data-confirm-ok>Prenota la guida</button>

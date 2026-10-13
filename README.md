@@ -18,11 +18,11 @@ assets/               favicon, immagine di anteprima per WhatsApp, illustrazioni
 demo/
   comune/            barra "Sito dimostrativo..." e avviso "Questa è una demo", per tutte le demo
   autoscuola-pistacchio/   demo moderna: pre-iscrizione a step, «Quale patente fa per te?», WhatsApp
-  autoscuola-ardesia/      demo classica: patenti, orari, documenti, mappa disegnata
-  autoscuole-crocevia/     demo con gestionale: area allievi, calendario guide, lavora con noi
+  autoscuola-ardesia/      demo classica: patenti, orari con «aperto ora», checklist dei documenti, domande frequenti, mappa disegnata
+  autoscuole-crocevia/     demo con gestionale: mappa delle sedi, area allievi con prenotazione delle guide, lavora con noi
 sitemap.xml           elenco delle pagine per Google
 robots.txt            istruzioni per i motori di ricerca
-.claude/              la "skill" di design usata per progettare il sito (non serve al sito)
+.gitignore            file e cartelle da non pubblicare (impostazioni locali e design system di lavoro)
 ```
 
 Tutti i collegamenti sono **relativi**: il sito funziona sia su `nomeutente.github.io` sia su `nomeutente.github.io/nome-repo/`.
@@ -71,7 +71,7 @@ Un "repository" (o "repo") è la cartella online che contiene i file del sito.
    `index.html` deve stare "in cima" al repository, non dentro un'altra cartella.
 3. Aspettate che il caricamento finisca, scrivete in basso un messaggio come `Primo caricamento del sito` e cliccate **Commit changes**.
 
-> Su Windows e Mac le cartelle che iniziano con un punto (come `.claude`) di solito sono nascoste e il browser non le carica. Va benissimo: al sito non servono.
+> Su Windows e Mac i file che iniziano con un punto (come `.nojekyll` e `.gitignore`) di solito sono nascosti e caricandoli dal browser possono restare fuori. Non è grave: il sito funziona lo stesso.
 
 ### In alternativa, con git (per chi usa il terminale)
 
@@ -211,7 +211,7 @@ Per ogni file: aprite il file su GitHub, cliccate la **matita**, cercate `NOMEUT
 
 ## Note tecniche
 
-- **Font:** Manrope (sito), Bricolage Grotesque e Figtree (demo Pistacchio), Playfair Display (demo Ardesia). Sono font di Google Fonts con licenza SIL Open Font License, scaricati e serviti dal sito stesso: il browser non contatta Google. Le licenze sono accanto ai file dei font.
+- **Font:** Manrope (sito), Bricolage Grotesque e Figtree (demo Pistacchio), Newsreader e IBM Plex Sans (demo Ardesia), Overpass e Overpass Mono (demo Crocevia). Sono font di Google Fonts con licenza SIL Open Font License, scaricati e serviti dal sito stesso: il browser non contatta Google. Le licenze sono accanto ai file dei font.
 - **Nessun cookie** e nessuno strumento di statistica: per questo non c'è il banner dei cookie. Se in futuro aggiungete Google Analytics o simili, servono banner e aggiornamento della privacy.
 - **Animazioni:** discrete, e disattivate per chi ha attivato "riduci movimento" nelle impostazioni del telefono o del computer.
 - **Accessibilità:** contrasti verificati, navigazione da tastiera, etichette nei moduli, testo alternativo per le immagini.
