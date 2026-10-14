@@ -1,167 +1,112 @@
 /* ==================================================================
-   AUTOSCUOLE CROCEVIA · DATI FINTI (demo di Next Siteo)
-   Sedi, orari, tipi di guida e orari occupati sono generati qui, in
-   modo ripetibile: lo stesso giorno mostra sempre gli stessi posti
-   liberi. In un sito vero questi dati arriverebbero dal gestionale.
+   AUTOSCUOLA CROCEVIA · DATI (demo di Next Siteo, attività di fantasia)
+   Tutti i contenuti che la pagina costruisce da JavaScript:
+   domande del quiz, FAQ e opzioni della pre-iscrizione.
+   Le domande del quiz sono esempi scritti per la demo, non quelle
+   ufficiali del Ministero.
    ================================================================== */
-(function () {
-  'use strict';
-
-  // Ogni sede è una "linea", come in una mappa della metro.
-  // orari: fasce di apertura della segreteria in minuti, per giorno (0 = domenica)
-  var SEDI = [
+window.CROCEVIA = {
+  // Mini quiz patente B: vero o falso, con la spiegazione mostrata dopo la risposta
+  quiz: [
     {
-      id: 'vallefinta', nome: 'Vallefinta', sigla: 'V', indirizzo: 'Corso Centrale 40',
-      auto: ['Auto 1, cambio manuale', 'Auto 2, cambio automatico'],
-      orari: { 1: [[540, 1140]], 2: [[540, 1140]], 3: [[540, 1140]], 4: [[540, 1140]], 5: [[540, 1140]], 6: [[540, 750]] }
+      testo: 'Il segnale di STOP obbliga a fermarsi anche se l\'incrocio è libero.',
+      risposta: true,
+      spiegazione: 'Allo STOP ci si ferma sempre, poi si dà la precedenza a chi arriva da destra e da sinistra.'
     },
     {
-      id: 'pratofinto', nome: 'Pratofinto', sigla: 'P', indirizzo: 'Via delle Querce 8',
-      auto: ['Auto 3, cambio manuale'],
-      orari: { 1: [[900, 1140]], 2: [[900, 1140]], 3: [[900, 1140]], 4: [[900, 1140]], 5: [[900, 1140]] }
+      testo: 'Con la patente B si può guidare un\'auto con più di nove posti, compreso quello del conducente.',
+      risposta: false,
+      spiegazione: 'La patente B vale per veicoli fino a nove posti in tutto: otto passeggeri più il conducente.'
     },
     {
-      id: 'borgo-lago', nome: 'Borgo Lago', sigla: 'B', indirizzo: 'Lungolago 15',
-      auto: ['Auto 4, cambio manuale'],
-      orari: { 2: [[540, 780]], 4: [[540, 780]], 6: [[540, 750]] }
+      testo: 'In autostrada il limite di velocità per le auto è 130 km/h, se i cartelli non indicano un limite diverso.',
+      risposta: true,
+      spiegazione: '130 km/h è il limite generale in autostrada. I cartelli possono indicarne uno più basso.'
+    },
+    {
+      testo: 'Quando piove, in autostrada il limite per le auto scende a 110 km/h.',
+      risposta: true,
+      spiegazione: 'Con pioggia, neve o altre precipitazioni il limite in autostrada scende a 110 km/h.'
+    },
+    {
+      testo: 'Nei centri abitati il limite generale di velocità è 50 km/h.',
+      risposta: true,
+      spiegazione: 'In città il limite è 50 km/h, salvo cartelli che ne indicano uno diverso.'
+    },
+    {
+      testo: 'Fuori dai centri abitati il triangolo va posizionato ad almeno 50 metri dal veicolo fermo.',
+      risposta: true,
+      spiegazione: 'Fuori città il triangolo va messo ad almeno 50 metri, in modo che si veda da lontano.'
+    },
+    {
+      testo: 'Il giallo fisso del semaforo significa che bisogna accelerare per passare prima del rosso.',
+      risposta: false,
+      spiegazione: 'Con il giallo ci si deve fermare. Si passa solo se si è già troppo vicini per fermarsi in sicurezza.'
+    },
+    {
+      testo: 'Le cinture di sicurezza sono obbligatorie anche per chi siede sui sedili posteriori.',
+      risposta: true,
+      spiegazione: 'Le cinture vanno allacciate su tutti i sedili, davanti e dietro.'
+    },
+    {
+      testo: 'Nei primi tre anni di patente B il limite in autostrada è 100 km/h.',
+      risposta: true,
+      spiegazione: 'Chi ha la patente B da meno di tre anni non può superare i 100 km/h in autostrada.'
+    },
+    {
+      testo: 'Nei primi tre anni di patente si può guidare con un tasso alcolemico fino a 0,5 grammi per litro.',
+      risposta: false,
+      spiegazione: 'Nei primi tre anni di patente il tasso alcolemico deve essere zero: nemmeno un bicchiere.'
     }
-  ];
+  ],
 
-  var TIPI = [
-    { id: 'citta', nome: 'Città' },
-    { id: 'extraurbana', nome: 'Extraurbana' },
-    { id: 'autostrada', nome: 'Autostrada' },
-    { id: 'notturna', nome: 'Notturna' }
-  ];
-
-  var GIORNI = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
-  var GIORNI_BREVI = ['dom', 'lun', 'mar', 'mer', 'gio', 'ven', 'sab'];
-  var MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
-
-  function iso(d) {
-    var m = String(d.getMonth() + 1).padStart(2, '0');
-    var g = String(d.getDate()).padStart(2, '0');
-    return d.getFullYear() + '-' + m + '-' + g;
-  }
-
-  function fromIso(s) {
-    var p = s.split('-').map(Number);
-    return new Date(p[0], p[1] - 1, p[2]);
-  }
-
-  function addDays(d, n) {
-    var x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-    x.setDate(x.getDate() + n);
-    return x;
-  }
-
-  // Lunedì della settimana che contiene la data
-  function monday(d) {
-    var day = d.getDay() || 7;
-    return addDays(d, 1 - day);
-  }
-
-  // Ore di inizio delle guide: le notturne solo la sera, il sabato solo la mattina
-  function ore(date, tipo) {
-    var sat = date.getDay() === 6;
-    if (tipo === 'notturna') return sat ? [] : [18, 19];
-    var list = [];
-    for (var h = 8; h <= (sat ? 12 : 17); h++) if (h !== 13) list.push(h);
-    return list;
-  }
-
-  // Hash semplice e ripetibile: decide se un orario è già occupato
-  function occupato(sedeId, date, h) {
-    var s = sedeId + '|' + iso(date) + '|' + h;
-    var x = 2166136261;
-    for (var i = 0; i < s.length; i++) {
-      x ^= s.charCodeAt(i);
-      x = Math.imul(x, 16777619);
+  // Domande frequenti (risposte volutamente generiche dove i dati cambiano caso per caso)
+  faq: [
+    {
+      domanda: 'A che età posso prendere la patente B?',
+      risposta: 'La patente B si prende a 18 anni. Se ti manca poco, passa in segreteria: ti diciamo quando puoi iniziare.'
+    },
+    {
+      domanda: 'Quali documenti servono per iscrivermi?',
+      risposta: 'Di solito un documento d\'identità valido, il codice fiscale, le foto tessera e il certificato medico per la patente. In segreteria ti diamo la lista giusta per il tuo caso.'
+    },
+    {
+      domanda: 'Quanto dura il percorso?',
+      risposta: 'Dipende da te: da quanto tempo hai per studiare e da come vanno le guide. Lo organizziamo insieme, intorno ai tuoi impegni.'
+    },
+    {
+      domanda: 'Quante guide devo fare?',
+      risposta: 'Per la patente B ci sono sei ore di guida obbligatorie con l\'istruttore: su strade extraurbane, in autostrada e di notte. Le altre le decidi tu, in base a come ti senti.'
+    },
+    {
+      domanda: 'Cos\'è il foglio rosa?',
+      risposta: 'È l\'autorizzazione che ti permette di esercitarti alla guida dopo l\'esame di teoria. Vale dodici mesi e in questo tempo puoi fare l\'esame di guida due volte.'
+    },
+    {
+      domanda: 'Cosa succede se non passo l\'esame?',
+      risposta: 'Succede, e si riprova. Ci sono tempi di attesa e un numero massimo di tentativi: ti spieghiamo cosa fare nel tuo caso e ti aiutiamo a prepararti meglio.'
+    },
+    {
+      domanda: 'La pre-iscrizione online mi impegna?',
+      risposta: 'No. Serve solo a farti richiamare con le informazioni giuste. L\'iscrizione vera la firmi in segreteria.'
     }
-    return ((x >>> 0) % 100) < 47;
-  }
+  ],
 
-  function passato(date, h) {
-    var t = new Date(date.getFullYear(), date.getMonth(), date.getDate(), h);
-    return t.getTime() <= Date.now();
-  }
-
-  function sede(id) {
-    return SEDI.filter(function (s) { return s.id === id; })[0];
-  }
-
-  function auto(sedeId, date, h) {
-    var s = sede(sedeId);
-    return s.auto[(date.getDate() + h) % s.auto.length];
-  }
-
-  function dataLunga(d) {
-    return GIORNI[d.getDay()] + ' ' + d.getDate() + ' ' + MESI[d.getMonth()];
-  }
-
-  function hhmm(m) {
-    return Math.floor(m / 60) + ':' + String(m % 60).padStart(2, '0');
-  }
-
-  // Segreteria aperta adesso? Testo pronto da mostrare.
-  function statoSede(id, now) {
-    var orari = sede(id).orari;
-    var day = now.getDay();
-    var min = now.getHours() * 60 + now.getMinutes();
-    var oggi = orari[day] || [];
-    for (var i = 0; i < oggi.length; i++) {
-      if (min >= oggi[i][0] && min < oggi[i][1]) return { open: true, text: 'Aperta ora, chiude alle ' + hhmm(oggi[i][1]) };
-      if (min < oggi[i][0]) return { open: false, text: 'Chiusa ora, apre alle ' + hhmm(oggi[i][0]) };
-    }
-    for (var d = 1; d <= 7; d++) {
-      var next = orari[(day + d) % 7];
-      if (next && next.length) {
-        return { open: false, text: 'Chiusa, apre ' + (d === 1 ? 'domani' : GIORNI[(day + d) % 7]) + ' alle ' + hhmm(next[0][0]) };
-      }
-    }
-    return { open: false, text: 'Chiusa' };
-  }
-
-  // Prossimi orari liberi, uno per sede (per la home)
-  function prossimiLiberi(n) {
-    var out = [];
-    var d = new Date();
-    SEDI.forEach(function (s) {
-      for (var i = 0; i < 14; i++) {
-        var day = addDays(d, i);
-        if (day.getDay() === 0) continue;
-        var hours = ore(day, 'citta');
-        for (var j = 0; j < hours.length; j++) {
-          if (!passato(day, hours[j]) && !occupato(s.id, day, hours[j])) {
-            out.push({ date: day, ora: hours[j], sede: s });
-            return;
-          }
-        }
-      }
-    });
-    out.sort(function (a, b) {
-      return a.date - b.date || a.ora - b.ora;
-    });
-    return out.slice(0, n);
-  }
-
-  window.Crocevia = {
-    SEDI: SEDI,
-    TIPI: TIPI,
-    GIORNI: GIORNI,
-    GIORNI_BREVI: GIORNI_BREVI,
-    MESI: MESI,
-    iso: iso,
-    fromIso: fromIso,
-    addDays: addDays,
-    monday: monday,
-    ore: ore,
-    occupato: occupato,
-    passato: passato,
-    sede: sede,
-    auto: auto,
-    dataLunga: dataLunga,
-    statoSede: statoSede,
-    prossimiLiberi: prossimiLiberi
-  };
-})();
+  // Opzioni della pre-iscrizione
+  patenti: [
+    { valore: 'B', nome: 'Patente B', nota: 'Auto' },
+    { valore: 'AM', nome: 'Patente AM', nota: 'Scooter e minicar' },
+    { valore: 'A1', nome: 'Patente A1', nota: 'Moto fino a 125 cc' },
+    { valore: 'A2', nome: 'Patente A2', nota: 'Moto fino a 35 kW' }
+  ],
+  fogliorosa: [
+    { valore: 'no', nome: 'No, devo ancora iniziare' },
+    { valore: 'si', nome: 'Sì, ce l\'ho già' }
+  ],
+  giorni: ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
+  fasce: [
+    { valore: 'mattina', nome: 'Mattina', nota: '9-13' },
+    { valore: 'pomeriggio', nome: 'Pomeriggio', nota: '14-18' },
+    { valore: 'sera', nome: 'Tardo pomeriggio', nota: '18-20' }
+  ]
+};

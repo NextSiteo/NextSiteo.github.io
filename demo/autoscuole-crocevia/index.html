@@ -3,32 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Autoscuole Crocevia, tre sedi | Demo di Next Siteo</title>
-  <meta name="description" content="Sito dimostrativo di una rete di autoscuole di fantasia con tre sedi: tabellone delle guide libere, mappa delle sedi, area allievi con prenotazione delle guide e pagina Lavora con noi. Realizzato da Next Siteo.">
+  <title>Autoscuola Crocevia, la patente dal telefono | Demo di Next Siteo</title>
+  <meta name="description" content="Sito dimostrativo di un'autoscuola di fantasia per ragazzi: pre-iscrizione online a step, mini quiz di teoria vero o falso, domande frequenti e WhatsApp. Realizzato da Next Siteo.">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#FFC928">
+  <meta name="theme-color" content="#4F46E5">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
-  <meta property="og:title" content="Autoscuole Crocevia | Sito dimostrativo di Next Siteo">
-  <meta property="og:description" content="Un esempio di sito con gestionale per autoscuole con più sedi. Attività di fantasia.">
+  <meta property="og:title" content="Autoscuola Crocevia | Sito dimostrativo di Next Siteo">
+  <meta property="og:description" content="Un esempio di sito moderno per un'autoscuola: pre-iscrizione online e quiz di teoria. Attività di fantasia.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="fonts/overpass-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
   <link rel="stylesheet" href="../comune/barra-demo.css">
   <link rel="stylesheet" href="css/style.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <!-- Icone: tratto in stile Lucide (licenza ISC), disegnate inline -->
+  <!-- Icone in stile Lucide (licenza ISC), disegnate inline -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
-    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
-    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v5l3.5 2"/></symbol>
-    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16.5" rx="2"/><path d="M3 10h18M8 2.5v4M16 2.5v4"/></symbol>
-    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="5" r="2.5"/><path d="M8.5 19H17a3.5 3.5 0 0 0 0-7H7a3.5 3.5 0 0 1 0-7h8.5"/></symbol>
-    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M17 7 7 17M7 7l10 10"/></symbol>
+    <symbol id="i-phone-device" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M3 10h18M8 2.5v4M16 2.5v4M8 14h3"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M5 2.5h14v19l-2.5-1.5-2.3 1.5-2.2-1.5-2.2 1.5-2.3-1.5L5 21.5z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v5l3.5 2"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2.5"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
   </svg>
 
   <a class="skip-link" href="#contenuto">Salta al contenuto</a>
@@ -36,20 +44,26 @@
   <header class="header">
     <div class="container header__bar">
       <a class="brand" href="index.html">
-        <svg viewBox="0 0 32 32" width="36" height="36" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="5" fill="#FFC928"/><path d="M16 4.5 29 27.5H3z" fill="#fff" stroke="#C8281E" stroke-width="3" stroke-linejoin="round"/><path d="M16 12.5v12M11 18.5h10" stroke="#15171A" stroke-width="2.8"/></svg>
-        <span>Autoscuole Crocevia<small>Tre sedi, un'unica scuola</small></span>
+        <svg class="brand__mark" viewBox="0 0 28 28" width="28" height="28" aria-hidden="true" focusable="false">
+          <rect x="8" y="1" width="12" height="26" rx="6" fill="#14142B"/>
+          <circle cx="14" cy="7.5" r="3" fill="#F87171"/>
+          <circle cx="14" cy="14" r="3" fill="#FFB020"/>
+          <circle cx="14" cy="20.5" r="3" fill="#4ADE80"/>
+        </svg>
+        <span class="brand__name">Crocevia<small>Autoscuola</small></span>
       </a>
       <nav class="nav" aria-label="Menu principale">
         <ul role="list">
-          <li><a href="#sedi">Sedi</a></li>
-          <li><a href="#area">Area allievi</a></li>
-          <li><a href="#corsi">Corsi</a></li>
-          <li><a href="lavora-con-noi.html">Lavora con noi</a></li>
+          <li><a href="#percorso">Patente B</a></li>
+          <li><a href="#come">Come funziona</a></li>
+          <li><a href="#quiz">Quiz</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contatti">Contatti</a></li>
         </ul>
       </nav>
       <div class="header__actions">
-        <a class="btn btn--sm btn--signal header__cta" href="area-allievi.html">Area allievi</a>
-        <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="menu-mobile" data-menu-toggle>
+        <a class="btn btn--primary btn--sm header__cta" href="#contatti" data-open-iscrizione>Pre-iscriviti</a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-mobile" data-menu-toggle>
           <svg class="icon icon--open" aria-hidden="true"><use href="#i-menu"/></svg>
           <svg class="icon icon--close" aria-hidden="true"><use href="#i-close"/></svg>
           <span class="sr-only">Menu</span>
@@ -57,12 +71,16 @@
       </div>
     </div>
     <nav class="menu-mobile" id="menu-mobile" aria-label="Menu mobile" data-menu hidden>
-      <ul class="container" role="list">
-        <li><a href="#sedi">Sedi</a></li>
-        <li><a href="#area">Area allievi</a></li>
-        <li><a href="#corsi">Corsi</a></li>
-        <li><a href="lavora-con-noi.html">Lavora con noi</a></li>
-      </ul>
+      <div class="container">
+        <ul role="list">
+          <li><a href="#percorso">Patente B</a></li>
+          <li><a href="#come">Come funziona</a></li>
+          <li><a href="#quiz">Quiz</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contatti">Contatti</a></li>
+        </ul>
+        <a class="btn btn--primary btn--block" href="#contatti" data-open-iscrizione>Pre-iscriviti online</a>
+      </div>
     </nav>
   </header>
 
@@ -71,188 +89,183 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero__grid">
         <div class="hero__text">
-          <p class="lines">
-            <span><span class="line" data-line="V" aria-hidden="true">V</span>Vallefinta</span>
-            <span><span class="line" data-line="P" aria-hidden="true">P</span>Pratofinto</span>
-            <span><span class="line" data-line="B" aria-hidden="true">B</span>Borgo Lago</span>
-          </p>
-          <h1 id="hero-title">Tre sedi. Le tue guide, prenotate dal telefono.</h1>
-          <p class="hero__lead">Scegli la sede più comoda, prenota le guide quando sei libero e segui il tuo percorso dall'area allievi.</p>
+          <p class="badge">Patente B a Vallefinta</p>
+          <h1 id="hero-title">La patente parte <span class="mark">dal telefono</span></h1>
+          <p class="hero__lead">Pre-iscriviti in pochi passaggi, allenati con i quiz e scegli le guide quando sei libero. Al resto pensiamo noi.</p>
           <div class="btn-row">
-            <a class="btn" href="area-allievi.html">Prova l'area allievi <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            <a class="btn btn--ghost" href="#sedi">Trova la sede</a>
+            <a class="btn btn--primary btn--lg" href="#contatti" data-open-iscrizione>Pre-iscriviti online <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn--ghost btn--lg" href="#quiz">Prova il quiz</a>
           </div>
         </div>
 
-        <aside class="board" aria-labelledby="board-title">
-          <div class="board__head">
-            <h2 id="board-title">Prossime guide libere</h2>
-            <span class="chip">Dati di esempio</span>
+        <div class="hero__visual" aria-hidden="true">
+          <div class="phone">
+            <div class="phone__screen">
+              <div class="app-bar">
+                <svg viewBox="0 0 28 28" width="20" height="20"><rect x="8" y="1" width="12" height="26" rx="6" fill="#14142B"/><circle cx="14" cy="7.5" r="3" fill="#F87171"/><circle cx="14" cy="14" r="3" fill="#FFB020"/><circle cx="14" cy="20.5" r="3" fill="#4ADE80"/></svg>
+                <b>Quiz patente B</b>
+              </div>
+              <div class="app-progress"><span>Domanda 4 di 10</span><i><b></b></i></div>
+              <p class="app-question">Quando piove, in autostrada il limite per le auto scende a 110 km/h.</p>
+              <div class="app-answers">
+                <span class="is-right"><svg class="icon"><use href="#i-check"/></svg> Vero</span>
+                <span>Falso</span>
+              </div>
+              <div class="app-feedback"><b>Giusto!</b> Con la pioggia il limite in autostrada scende a 110 km/h.</div>
+              <div class="app-next">Prossima domanda</div>
+            </div>
           </div>
-          <ul class="board__rows" role="list" data-next-slots>
-            <li aria-hidden="true"><span class="board__skeleton"></span><span class="board__skeleton"></span><span></span></li>
-            <li aria-hidden="true"><span class="board__skeleton"></span><span class="board__skeleton"></span><span></span></li>
-            <li aria-hidden="true"><span class="board__skeleton"></span><span class="board__skeleton"></span><span></span></li>
-          </ul>
-          <p class="board__foot">Orari generati per la demo. <a href="area-allievi.html#prenota">Vedi tutto il calendario</a></p>
-        </aside>
+          <div class="float-card">
+            <span class="float-card__step">2 di 5</span>
+            <span><b>Pre-iscrizione</b><small>Scegli la patente</small></span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ============ SEDI ============ -->
-    <section class="section" id="sedi" aria-labelledby="sedi-title">
+    <!-- ============ PERCHÉ ============ -->
+    <section class="section section--white" id="perche" aria-labelledby="perche-title">
       <div class="container">
-        <div class="net-grid">
-          <div class="head">
-            <p class="eyebrow">Le sedi</p>
-            <h2 id="sedi-title">Tre linee, un'unica scuola.</h2>
-            <p>Ti iscrivi in una sede e fai lezione e guide dove ti è più comodo. Tutte e tre si incrociano nell'area allievi. Tocca una fermata per vedere la sede.</p>
-          </div>
-          <figure class="network">
-            <svg viewBox="0 0 480 340" width="480" height="340" role="group" aria-labelledby="net-t">
-              <title id="net-t">Mappa delle sedi, disegnata come le linee di una metro</title>
-              <g fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M30 75H140l100 100" stroke="#C8281E"/>
-                <path d="M460 60H380L265 175" stroke="#0A7350"/>
-                <path d="M460 280H380L285 185" stroke="#1F5FAD"/>
-              </g>
-              <g stroke-width="5" stroke-linecap="round">
-                <path d="M30 63v24" stroke="#C8281E"/><path d="M460 48v24" stroke="#0A7350"/><path d="M460 268v24" stroke="#1F5FAD"/>
-              </g>
-              <circle cx="252" cy="178" r="40" fill="#15171A"/>
-              <circle cx="252" cy="178" r="31" fill="none" stroke="#FFC928" stroke-width="4"/>
-              <g font-family="Overpass, Arial, sans-serif" font-weight="900" font-size="12" fill="#FFC928" text-anchor="middle"><text x="252" y="176">AREA</text><text x="252" y="191">ALLIEVI</text></g>
-              <a href="#sede-vallefinta">
-                <circle class="station" cx="84" cy="75" r="17" fill="#fff" stroke="#C8281E" stroke-width="6"/>
-                <text x="84" y="81" text-anchor="middle" font-family="Overpass, Arial, sans-serif" font-weight="900" font-size="15" fill="#15171A">V</text>
-                <text x="84" y="118" text-anchor="middle" font-family="Overpass, Arial, sans-serif" font-weight="800" font-size="18" fill="#15171A">Vallefinta</text>
-                <text x="84" y="137" text-anchor="middle" font-family="Overpass, Arial, sans-serif" font-size="13" fill="#4A4F57">Sede principale</text>
-              </a>
-              <a href="#sede-pratofinto">
-                <circle class="station" cx="418" cy="60" r="17" fill="#fff" stroke="#0A7350" stroke-width="6"/>
-                <text x="418" y="66" text-anchor="middle" font-family="Overpass, Arial, sans-serif" font-weight="900" font-size="15" fill="#15171A">P</text>
-                <text x="418" y="103" text-anchor="middle" font-family="Overpass, Arial, sans-serif" font-weight="800" font-size="18" fill="#15171A">Pratofinto</text>
-                <text x="418" y="122" text-anchor="middle" font-family="Overpass, Arial, sans-serif" font-size="13" fill="#4A4F57">Pomeriggi</text>
-              </a>
-              <a href="#sede-borgo-lago">
-                <circle class="station" cx="418" cy="280" r="17" fill="#fff" stroke="#1F5FAD" stroke-width="6"/>
-                <text x="418" y="286" text-anchor="middle" font-family="Overpass, Arial, sans-serif" font-weight="900" font-size="15" fill="#15171A">B</text>
-                <text x="418" y="323" text-anchor="middle" font-family="Overpass, Arial, sans-serif" font-weight="800" font-size="18" fill="#15171A">Borgo Lago</text>
-              </a>
-            </svg>
-            <figcaption>Schema delle sedi, non in scala: le distanze non sono reali.</figcaption>
-          </figure>
+        <div class="head" data-reveal>
+          <h2 id="perche-title">Perché scegliere Crocevia</h2>
+          <p>Una scuola guida pensata per chi ha la scuola, lo sport e mille altri impegni.</p>
         </div>
-
-        <div class="sedi">
-          <article class="sede" id="sede-vallefinta" data-line="V" data-sede="vallefinta">
-            <div class="sede__top"><span class="line line--lg" data-line="V" aria-hidden="true">V</span><h3>Vallefinta</h3><span class="chip chip--signal">Sede principale</span></div>
-            <p class="status" data-sede-status>Lunedì-venerdì 9:00-19:00, sabato 9:00-12:30</p>
-            <dl>
-              <div><dt><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span class="sr-only">Indirizzo</span></dt><dd>Corso Centrale 40, 00000 Vallefinta (XX)</dd></div>
-              <div><dt><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span class="sr-only">Orari della segreteria</span></dt><dd>Lunedì-venerdì 9:00-19:00, sabato 9:00-12:30</dd></div>
-            </dl>
-            <p class="sede__lic"><span class="sr-only">Patenti: </span><span class="chip">AM</span><span class="chip">A</span><span class="chip">B</span><span class="chip">BE</span><span class="chip">C</span><span class="chip">CQC</span></p>
-            <a class="btn btn--ghost btn--sm sede__go" href="area-allievi.html?sede=vallefinta#prenota">Prenota una guida qui <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </article>
-          <article class="sede" id="sede-pratofinto" data-line="P" data-sede="pratofinto">
-            <div class="sede__top"><span class="line line--lg" data-line="P" aria-hidden="true">P</span><h3>Pratofinto</h3></div>
-            <p class="status" data-sede-status>Lunedì-venerdì 15:00-19:00</p>
-            <dl>
-              <div><dt><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span class="sr-only">Indirizzo</span></dt><dd>Via delle Querce 8, 00000 Pratofinto (XX)</dd></div>
-              <div><dt><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span class="sr-only">Orari della segreteria</span></dt><dd>Lunedì-venerdì 15:00-19:00</dd></div>
-            </dl>
-            <p class="sede__lic"><span class="sr-only">Patenti: </span><span class="chip">AM</span><span class="chip">A</span><span class="chip">B</span><span class="chip">BE</span></p>
-            <a class="btn btn--ghost btn--sm sede__go" href="area-allievi.html?sede=pratofinto#prenota">Prenota una guida qui <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </article>
-          <article class="sede" id="sede-borgo-lago" data-line="B" data-sede="borgo-lago">
-            <div class="sede__top"><span class="line line--lg" data-line="B" aria-hidden="true">B</span><h3>Borgo Lago</h3></div>
-            <p class="status" data-sede-status>Martedì e giovedì 9:00-13:00, sabato 9:00-12:30</p>
-            <dl>
-              <div><dt><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span class="sr-only">Indirizzo</span></dt><dd>Lungolago 15, 00000 Borgo Lago (XX)</dd></div>
-              <div><dt><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span class="sr-only">Orari della segreteria</span></dt><dd>Martedì e giovedì 9:00-13:00, sabato 9:00-12:30</dd></div>
-            </dl>
-            <p class="sede__lic"><span class="sr-only">Patenti: </span><span class="chip">AM</span><span class="chip">B</span></p>
-            <a class="btn btn--ghost btn--sm sede__go" href="area-allievi.html?sede=borgo-lago#prenota">Prenota una guida qui <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </article>
-        </div>
+        <ul class="cards" role="list">
+          <li class="card" data-reveal>
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-phone-device"/></svg></span>
+            <h3>Iscrizione dal telefono</h3>
+            <p>Ti pre-iscrivi online in pochi passaggi. In segreteria passi solo per firmare.</p>
+          </li>
+          <li class="card" data-reveal>
+            <span class="card__icon card__icon--yellow"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>
+            <h3>Orari che rispettano la scuola</h3>
+            <p>Guide nel pomeriggio e il sabato mattina. Le scegli tu, intorno alle lezioni.</p>
+          </li>
+          <li class="card" data-reveal>
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-receipt"/></svg></span>
+            <h3>Preventivo prima di iniziare</h3>
+            <p>Ti diamo i costi per iscritto, voce per voce. Niente sorprese a metà strada.</p>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- ============ AREA ALLIEVI ============ -->
-    <section class="section section--white" id="area" aria-labelledby="area-title">
-      <div class="container feature-band">
-        <div>
-          <div class="head" style="margin-bottom:0">
-            <p class="eyebrow">Area allievi</p>
-            <h2 id="area-title">Le guide, sempre in tasca.</h2>
-            <p>Niente più telefonate per spostare una guida. Gli allievi fanno da soli, la segreteria vede tutto in ordine.</p>
-          </div>
-          <ul class="features" role="list">
-            <li class="feature">
-              <span class="feature__icon"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>
-              <div><h3>Prenota e sposta le guide</h3><p>Scegli sede, giorno e orario tra quelli liberi. Se cambi idea, disdici con un tocco.</p></div>
-            </li>
-            <li class="feature">
-              <span class="feature__icon"><svg class="icon" aria-hidden="true"><use href="#i-route"/></svg></span>
-              <div><h3>Segui il tuo percorso</h3><p>Teoria, foglio rosa, guide obbligatorie fatte e da fare: sai sempre a che punto sei.</p></div>
-            </li>
-            <li class="feature">
-              <span class="feature__icon"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg></span>
-              <div><h3>Promemoria</h3><p>Un avviso il giorno prima di ogni guida, così nessuno resta ad aspettare.</p></div>
-            </li>
-          </ul>
-          <p style="margin-top:var(--s-5)"><a class="btn" href="area-allievi.html">Prova l'area allievi <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
-        </div>
-        <div class="phone" aria-hidden="true">
-          <div class="phone__screen">
-            <div class="phone__bar"><span>Prenota una guida</span><span class="line" data-line="V">V</span></div>
-            <div class="phone__days"><span>lun<b>12</b></span><span class="on">mar<b>13</b></span><span>mer<b>14</b></span><span>gio<b>15</b></span><span>ven<b>16</b></span></div>
-            <div class="phone__slots"><span>8:00</span><span class="busy">9:00</span><span class="mine">10:00</span><span class="busy">11:00</span><span>12:00</span><span>14:00</span><span class="busy">15:00</span><span>16:00</span><span>17:00</span></div>
-            <div class="phone__cta">Prenota mar 13 alle 12:00</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CORSI ============ -->
-    <section class="section" id="corsi" aria-labelledby="corsi-title">
+    <!-- ============ COME FUNZIONA ============ -->
+    <section class="section section--tint" id="come" aria-labelledby="come-title">
       <div class="container">
-        <div class="head">
-          <p class="eyebrow">Corsi</p>
-          <h2 id="corsi-title">Quale corso, in quale sede.</h2>
-          <p>Teoria e guide per ogni patente. Ecco dove trovi ogni corso.</p>
+        <div class="head" data-reveal>
+          <h2 id="come-title">Come funziona</h2>
+          <p>Dalla pre-iscrizione all'esame, un passo alla volta.</p>
         </div>
-        <table class="matrix">
-          <caption>Corsi disponibili in ogni sede. Le lezioni di teoria valgono in tutte le sedi.</caption>
-          <thead>
-            <tr>
-              <th scope="col">Corso</th>
-              <th scope="col"><span class="line" data-line="V" aria-hidden="true">V</span><span class="name">Vallefinta</span></th>
-              <th scope="col"><span class="line" data-line="P" aria-hidden="true">P</span><span class="name">Pratofinto</span></th>
-              <th scope="col"><span class="line" data-line="B" aria-hidden="true">B</span><span class="name">Borgo Lago</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><th scope="row">AM<small>scooter e minicar</small></th><td data-line="V"><span class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr-only">Sì</span></td><td data-line="P"><span class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr-only">Sì</span></td><td data-line="B"><span class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr-only">Sì</span></td></tr>
-            <tr><th scope="row">A1, A2 e A<small>moto</small></th><td data-line="V"><span class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr-only">Sì</span></td><td data-line="P"><span class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr-only">Sì</span></td><td class="no"><span aria-hidden="true">—</span><span class="sr-only">No</span></td></tr>
-            <tr><th scope="row">B<small>auto</small></th><td data-line="V"><span class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr-only">Sì</span></td><td data-line="P"><span class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr-only">Sì</span></td><td data-line="B"><span class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr-only">Sì</span></td></tr>
-            <tr><th scope="row">BE<small>auto con rimorchio</small></th><td data-line="V"><span class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr-only">Sì</span></td><td data-line="P"><span class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr-only">Sì</span></td><td class="no"><span aria-hidden="true">—</span><span class="sr-only">No</span></td></tr>
-            <tr><th scope="row">C e CQC<small>per lavoro</small></th><td data-line="V"><span class="yes"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr-only">Sì</span></td><td class="no"><span aria-hidden="true">—</span><span class="sr-only">No</span></td><td class="no"><span aria-hidden="true">—</span><span class="sr-only">No</span></td></tr>
-          </tbody>
-        </table>
+        <ol class="steps" role="list">
+          <li class="step" data-reveal>
+            <span class="step__num" aria-hidden="true">1</span>
+            <h3>Pre-iscrizione online</h3>
+            <p>Lasci i tuoi dati dal telefono. Ti richiamiamo per fissare l'iscrizione.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num" aria-hidden="true">2</span>
+            <h3>Teoria e quiz</h3>
+            <p>Lezioni in aula e quiz per allenarti, anche da casa.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num" aria-hidden="true">3</span>
+            <h3>Guide pratiche</h3>
+            <p>Con il foglio rosa inizi le guide, negli orari che scegli tu.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num" aria-hidden="true">4</span>
+            <h3>Esame</h3>
+            <p>Quando sei pronto, ti accompagniamo all'esame di guida.</p>
+          </li>
+        </ol>
       </div>
     </section>
 
-    <!-- ============ LAVORA CON NOI ============ -->
-    <section class="section" style="padding-top:0" aria-labelledby="lavora-title">
+    <!-- ============ PERCORSO PATENTE B ============ -->
+    <section class="section" id="percorso" aria-labelledby="percorso-title">
       <div class="container">
-        <div class="band">
-          <div>
-            <h2 id="lavora-title">Cerchiamo <em>istruttori</em> e insegnanti di teoria.</h2>
-            <p>Tre sedi, orari concordati e auto con doppi comandi. Candidati in due minuti.</p>
+        <div class="plan" data-reveal>
+          <div class="plan__intro">
+            <p class="badge">Patente B</p>
+            <h2 id="percorso-title">Il tuo percorso Patente B</h2>
+            <p>Tutto quello che serve per arrivare all'esame, seguito dalle stesse persone dall'inizio alla fine.</p>
+            <p class="plan__note">Il preventivo te lo diamo scritto, voce per voce, prima dell'iscrizione.</p>
           </div>
-          <a class="btn btn--signal" href="lavora-con-noi.html">Lavora con noi <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <div class="plan__box">
+            <h3>Cosa comprende</h3>
+            <ul class="checklist" role="list">
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Pratiche per la domanda e il foglio rosa</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Lezioni di teoria in aula</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Quiz per allenarti, anche dal telefono</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Le guide obbligatorie con l'istruttore</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Accompagnamento all'esame di teoria e di guida</li>
+            </ul>
+            <a class="btn btn--primary btn--block" href="#contatti" data-open-iscrizione>Pre-iscriviti <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ QUIZ ============ -->
+    <section class="section section--tint" id="quiz" aria-labelledby="quiz-title">
+      <div class="container quiz-wrap">
+        <div class="head head--center" data-reveal>
+          <h2 id="quiz-title">Mettiti alla prova</h2>
+          <p>Dieci domande vero o falso, come all'esame di teoria. Ti diciamo subito se hai risposto bene.</p>
+        </div>
+        <div class="quiz" data-quiz>
+          <noscript><p>Il quiz funziona con JavaScript attivo.</p></noscript>
+        </div>
+        <p class="quiz-note">Domande di esempio scritte per questa demo: non sono quelle ufficiali del Ministero.</p>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-wrap">
+        <div class="head head--center" data-reveal>
+          <h2 id="faq-title">Domande frequenti</h2>
+          <p>Le risposte alle domande che ci fate più spesso. Il resto chiedilo pure a noi.</p>
+        </div>
+        <div class="faq" data-faq>
+          <noscript><p>Le domande frequenti si aprono con JavaScript attivo. Per qualsiasi dubbio chiamaci o passa in segreteria.</p></noscript>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTATTI ============ -->
+    <section class="section section--tint" id="contatti" aria-labelledby="contatti-title">
+      <div class="container">
+        <div class="head" data-reveal>
+          <h2 id="contatti-title">Passa a trovarci</h2>
+          <p>Siamo in centro a Vallefinta. Per informazioni non serve l'appuntamento.</p>
+        </div>
+        <div class="contacts">
+          <div class="contact-card" data-reveal>
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span>
+            <h3>Orari della segreteria</h3>
+            <dl class="hours">
+              <div><dt>Lunedì-venerdì</dt><dd>15:00-19:30</dd></div>
+              <div><dt>Sabato</dt><dd>9:30-12:30</dd></div>
+              <div><dt>Domenica</dt><dd>Chiuso</dd></div>
+            </dl>
+          </div>
+          <div class="contact-card" data-reveal>
+            <span class="card__icon"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg></span>
+            <h3>Dove siamo</h3>
+            <address>
+              <p>Via del Semaforo 5<br>00000 Vallefinta (XX)</p>
+              <p><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><a href="#chiama" data-demo-avviso="Il numero è finto: in un sito vero qui partirebbe la chiamata.">000 000 0000</a></p>
+              <p><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><a href="#email" data-demo-avviso="L'indirizzo è finto: in un sito vero qui si aprirebbe l'email.">segreteria@example.com</a></p>
+            </address>
+          </div>
+          <div class="contact-card contact-card--accent" data-reveal>
+            <span class="card__icon card__icon--white"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg></span>
+            <h3>Scrivici su WhatsApp</h3>
+            <p>Per una domanda veloce, scrivici: ti rispondiamo negli orari di segreteria.</p>
+            <button class="btn btn--white" type="button" data-demo-avviso="In un sito vero qui si aprirebbe la chat WhatsApp della segreteria.">Apri WhatsApp</button>
+          </div>
         </div>
       </div>
     </section>
@@ -261,18 +274,139 @@
   <footer class="footer">
     <div class="container footer__grid">
       <div>
-        <h2>Autoscuole Crocevia</h2>
-        <p>Tel. <a href="#chiama" data-demo-avviso="Il numero è finto: in un sito vero qui partirebbe la chiamata.">000 000 0000</a><br><a href="#email" data-demo-avviso="L'indirizzo è finto: in un sito vero qui si aprirebbe l'email.">info@crocevia.example</a></p>
+        <p class="footer__brand">Crocevia <small>Autoscuola</small></p>
+        <p>Via del Semaforo 5, 00000 Vallefinta (XX)<br>Tel. 000 000 0000 – segreteria@example.com</p>
       </div>
-      <div><h2><span class="line" data-line="V" aria-hidden="true">V</span>Vallefinta</h2><address>Corso Centrale 40</address></div>
-      <div><h2><span class="line" data-line="P" aria-hidden="true">P</span>Pratofinto</h2><address>Via delle Querce 8</address></div>
-      <div><h2><span class="line" data-line="B" aria-hidden="true">B</span>Borgo Lago</h2><address>Lungolago 15</address></div>
+      <nav aria-label="Link del sito">
+        <ul role="list">
+          <li><a href="#percorso">Patente B</a></li>
+          <li><a href="#come">Come funziona</a></li>
+          <li><a href="#quiz">Quiz</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
     </div>
     <div class="container footer__legal">
-      <p>© <span data-year>2026</span> Autoscuole Crocevia. Attività di fantasia: sito dimostrativo.</p>
-      <p><a href="lavora-con-noi.html">Lavora con noi</a> – <a href="../../index.html">Realizzato da Next Siteo</a></p>
+      <p>© <span data-year>2026</span> Autoscuola Crocevia. Attività di fantasia: sito dimostrativo.</p>
+      <p><a href="../../index.html">Realizzato da Next Siteo</a></p>
     </div>
   </footer>
+
+  <button class="wa-float" type="button" data-demo-avviso="In un sito vero qui si aprirebbe la chat WhatsApp della segreteria.">
+    <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg><span>WhatsApp</span>
+  </button>
+
+  <!-- ============ PRE-ISCRIZIONE (modale) ============ -->
+  <dialog class="modal" aria-labelledby="modal-title" data-modal>
+    <div class="modal__head">
+      <div>
+        <p class="modal__count" data-count>Passo 1 di 5</p>
+        <h2 id="modal-title">Pre-iscrizione</h2>
+      </div>
+      <button class="icon-btn" type="button" data-close aria-label="Chiudi la pre-iscrizione">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+    <div class="modal__bar" aria-hidden="true"><span data-bar></span></div>
+
+    <form class="modal__form" data-form novalidate>
+      <div class="modal__body">
+        <!-- Passo 1 -->
+        <section class="mstep" data-step="1" aria-labelledby="st1">
+          <h3 id="st1" tabindex="-1">I tuoi dati</h3>
+          <p class="mstep__hint">Tutti i campi sono obbligatori.</p>
+          <div class="field">
+            <label for="f-nome">Nome</label>
+            <input id="f-nome" name="nome" autocomplete="given-name" aria-describedby="f-nome-err">
+            <p class="field__error" id="f-nome-err" hidden></p>
+          </div>
+          <div class="field">
+            <label for="f-cognome">Cognome</label>
+            <input id="f-cognome" name="cognome" autocomplete="family-name" aria-describedby="f-cognome-err">
+            <p class="field__error" id="f-cognome-err" hidden></p>
+          </div>
+          <div class="field">
+            <label for="f-nascita">Data di nascita</label>
+            <input id="f-nascita" name="nascita" type="date" autocomplete="bday" aria-describedby="f-nascita-err">
+            <p class="field__error" id="f-nascita-err" hidden></p>
+          </div>
+        </section>
+
+        <!-- Passo 2 -->
+        <section class="mstep" data-step="2" aria-labelledby="st2" hidden>
+          <h3 id="st2" tabindex="-1">La patente</h3>
+          <fieldset class="field" aria-describedby="f-patente-err" data-group="patente">
+            <legend>Quale patente vuoi prendere?</legend>
+            <div class="options options--2" data-options="patenti"></div>
+            <p class="field__error" id="f-patente-err" hidden></p>
+          </fieldset>
+          <fieldset class="field" aria-describedby="f-fogliorosa-err" data-group="fogliorosa">
+            <legend>Hai già il foglio rosa?</legend>
+            <div class="options" data-options="fogliorosa"></div>
+            <p class="field__error" id="f-fogliorosa-err" hidden></p>
+          </fieldset>
+        </section>
+
+        <!-- Passo 3 -->
+        <section class="mstep" data-step="3" aria-labelledby="st3" hidden>
+          <h3 id="st3" tabindex="-1">Quando puoi fare le guide</h3>
+          <p class="mstep__hint">Segna tutto quello che va bene: ci aiuta a trovarti gli orari giusti.</p>
+          <fieldset class="field" aria-describedby="f-giorni-err" data-group="giorni">
+            <legend>Giorni</legend>
+            <div class="chips" data-options="giorni"></div>
+            <p class="field__error" id="f-giorni-err" hidden></p>
+          </fieldset>
+          <fieldset class="field" aria-describedby="f-fasce-err" data-group="fasce">
+            <legend>Fasce orarie</legend>
+            <div class="options" data-options="fasce"></div>
+            <p class="field__error" id="f-fasce-err" hidden></p>
+          </fieldset>
+        </section>
+
+        <!-- Passo 4 -->
+        <section class="mstep" data-step="4" aria-labelledby="st4" hidden>
+          <h3 id="st4" tabindex="-1">Come ti ricontattiamo</h3>
+          <div class="field">
+            <label for="f-tel">Telefono</label>
+            <input id="f-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="f-tel-err">
+            <p class="field__error" id="f-tel-err" hidden></p>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" aria-describedby="f-email-err">
+            <p class="field__error" id="f-email-err" hidden></p>
+          </div>
+          <div class="field">
+            <label class="check"><input type="checkbox" id="f-privacy" name="privacy" aria-describedby="f-privacy-err"><span>Ho preso visione dell'informativa privacy e accetto di essere ricontattato.</span></label>
+            <p class="field__error" id="f-privacy-err" hidden></p>
+          </div>
+        </section>
+
+        <!-- Passo 5 -->
+        <section class="mstep" data-step="5" aria-labelledby="st5" hidden>
+          <h3 id="st5" tabindex="-1">Controlla i dati</h3>
+          <p class="mstep__hint">Se qualcosa non va, tocca «Modifica».</p>
+          <div class="summary" data-summary></div>
+        </section>
+
+        <!-- Fatto -->
+        <section class="mstep mstep--done" data-step="6" aria-labelledby="st6" hidden>
+          <span class="done__icon"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+          <h3 id="st6" tabindex="-1">Questa è una demo</h3>
+          <p>Nessun dato è stato inviato. In un sito vero la segreteria riceverebbe la tua pre-iscrizione e ti richiamerebbe per fissare l'iscrizione.</p>
+          <div class="btn-row">
+            <button class="btn btn--primary" type="button" data-close>Chiudi</button>
+            <button class="btn btn--ghost" type="button" data-restart>Nuova pre-iscrizione</button>
+          </div>
+        </section>
+      </div>
+
+      <div class="modal__foot" data-foot>
+        <button class="btn btn--ghost" type="button" data-prev>Indietro</button>
+        <button class="btn btn--primary" type="submit" data-next>Avanti</button>
+      </div>
+    </form>
+  </dialog>
 
   <script src="../comune/barra-demo.js" defer></script>
   <script src="js/dati.js" defer></script>
