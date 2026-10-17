@@ -20,13 +20,14 @@
   <meta property="og:image" content="https://nextsiteo.github.io/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Next Siteo: siti e strumenti su misura per attività locali">
+  <meta property="og:image:alt" content="Next Siteo: siti e strumenti digitali su misura per attività locali">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="../assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../css/style.css">
-  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="../css/style.css?v=2026-10-17">
+  <!-- Animazioni allo scroll solo con JavaScript attivo; se js/main.js non arriva entro 3 secondi si mostra tutto -->
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.NEXTSITEO_PRONTO)document.documentElement.classList.remove('js')},3000);</script>
 
   <script type="application/ld+json">
   {
@@ -120,7 +121,6 @@
   </script>
 </head>
 <body data-pagina="autoscuole">
-  <!-- Icone disegnate per il sito: griglia 24x24, tratto 1.75 -->
   <svg class="sprite" aria-hidden="true" focusable="false">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
@@ -133,13 +133,8 @@
     <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m9.5 14.8 1.8 1.8 3.4-3.4"/></symbol>
     <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="16" rx="2.5"/><path d="M3.5 9h17M9.5 9v11"/></symbol>
     <symbol id="i-apps" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><path d="M16.5 13.5v6M13.5 16.5h6"/></symbol>
-    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8l4.5 4.5v12.5H6z"/><path d="M14 3.5V8h4.5M9 12.5h6M9 16h6"/></symbol>
-    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8.5 8-4 4 4 4M15.5 8l4 4-4 4M13.5 5.5l-3 13"/></symbol>
-    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.6 3.6 5.4 3.6 8.5s-1.2 5.9-3.6 8.5c-2.4-2.6-3.6-5.4-3.6-8.5s1.2-5.9 3.6-8.5z"/></symbol>
     <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M3.5 13.5 6 5.5h12l2.5 8v5A1.5 1.5 0 0 1 19 20H5a1.5 1.5 0 0 1-1.5-1.5z"/><path d="M3.5 13.5h5l1.5 2.5h4l1.5-2.5h5"/></symbol>
-    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
-    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
-    <symbol id="i-euro" viewBox="0 0 24 24"><path d="M17.5 6.5a7 7 0 1 0 0 11M4.5 10.5h9M4.5 13.5h9"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></symbol>
   </svg>
 
   <a class="skip-link" href="#contenuto">Vai al contenuto</a>
@@ -159,7 +154,7 @@
         <ul class="nav__list" role="list">
           <li><a href="#problemi">Il problema</a></li>
           <li><a href="#demo">Demo</a></li>
-          <li><a href="#metodo">Come lavoriamo</a></li>
+          <li><a href="#metodo">Metodo</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#contatti">Contatti</a></li>
         </ul>
@@ -183,12 +178,12 @@
         <ul role="list">
           <li><a href="#problemi">Il problema <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
           <li><a href="#demo">Demo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-          <li><a href="#metodo">Come lavoriamo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-          <li><a href="#faq">FAQ <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#metodo">Metodo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#faq">Domande frequenti <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
           <li><a href="#contatti">Contatti <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
           <li><a href="../index.html">Tutte le attività <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
         </ul>
-        <a class="btn btn--primary btn--lg btn--block" href="#contatti">Preventivo gratuito</a>
+        <a class="btn btn--primary btn--lg btn--block" href="#contatti">Richiedi un preventivo gratuito</a>
       </nav>
     </div>
   </header>
@@ -199,297 +194,348 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero__grid">
         <div class="hero__text">
-          <p class="eyebrow">Siti per autoscuole · Milano e dintorni</p>
-          <h1 id="hero-title" class="hero__title">Meno telefonate in segreteria, <span class="accent">più iscrizioni dal telefono.</span></h1>
-          <p class="lead hero__lead">Prezzi delle patenti, documenti, orari e pre-iscrizioni: tutto sul sito, scritto chiaro. Gli allievi trovano le risposte da soli e voi ricevete richieste già complete.</p>
-          <div class="btn-row">
-            <a class="btn btn--primary btn--lg" href="https://wa.me/393472261131?text=Ciao%20Next%20Siteo%2C%20ho%20visto%20la%20pagina%20per%20autoscuole%20e%20vorrei%20informazioni." target="_blank" rel="noopener" data-wa="Ciao Next Siteo, ho visto la pagina per autoscuole e vorrei informazioni.">
-              <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg> Scriveteci su WhatsApp<span class="sr-only"> (si apre in una nuova scheda)</span>
-            </a>
-            <a class="btn btn--ghost btn--lg" href="#contatti" data-cta-call>Richiedi un preventivo gratuito</a>
+          <p class="kicker" data-enter style="--i:0">Siti per autoscuole · Milano e dintorni</p>
+          <h1 id="hero-title" class="hero__title" data-enter style="--i:1">Meno telefonate in segreteria, <span>più iscrizioni dal telefono.</span></h1>
+          <p class="lead hero__lead" data-enter style="--i:2">Prezzi delle patenti, documenti, orari e pre-iscrizioni: tutto sul sito, scritto chiaro. Gli allievi trovano le risposte da soli e voi ricevete richieste già complete.</p>
+          <div class="btn-row" data-enter style="--i:3">
+            <a class="btn btn--primary btn--lg" href="#contatti">Richiedi un preventivo gratuito <svg class="icon icon--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn--lg" href="#demo">Guarda le demo</a>
           </div>
-          <ul class="promises" role="list" aria-label="Cosa vi garantiamo">
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Preventivo scritto con tempi e costi</li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Il dominio resta vostro</li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Vedete il sito prima che vada online</li>
+          <ul class="hero__facts" role="list" data-enter style="--i:4">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Preventivo gratuito e scritto</li>
             <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Risposta entro 24-48 ore</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Nessuna app da installare</li>
           </ul>
         </div>
 
-        <div class="hero__visual">
-          <div class="hero__panel" aria-hidden="true"></div>
-          <figure class="hero__device">
-            <div class="device device--phone" inert aria-hidden="true">
-              <div class="device__screen" data-screen style="--ratio: 390 / 760">
-                <iframe src="../demo/autoscuola-pistacchio/iscrizione.html" title="Anteprima: la pre-iscrizione online della demo Autoscuola Pistacchio" loading="lazy" tabindex="-1" width="390" height="844"></iframe>
+        <!-- Composizione: schermate reali della demo Crocevia + due schede illustrative (dati di esempio) -->
+        <figure class="showcase" data-parallax>
+          <div class="showcase__stage" aria-hidden="true">
+            <div class="showcase__glow"></div>
+            <div class="browser" data-depth="0.35">
+              <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">Demo · Autoscuola Crocevia</span></div>
+              <img src="../assets/anteprime/crocevia-home-1280.webp" srcset="../assets/anteprime/crocevia-home-640.webp 640w, ../assets/anteprime/crocevia-home-1280.webp 1280w" sizes="(min-width: 1024px) 540px, 88vw" width="1280" height="800" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="phone" data-depth="0.9">
+              <div class="phone__screen">
+                <img src="../assets/anteprime/crocevia-quiz-390.webp" srcset="../assets/anteprime/crocevia-quiz-390.webp 390w, ../assets/anteprime/crocevia-quiz-780.webp 780w" sizes="(min-width: 1024px) 200px, 33vw" width="390" height="844" alt="" loading="lazy" decoding="async">
               </div>
             </div>
-            <figcaption class="hero__caption">Una delle nostre demo: la pre-iscrizione online di un'autoscuola. <a href="../demo/autoscuola-pistacchio/iscrizione.html" data-keep-src>Provatela</a></figcaption>
-          </figure>
-        </div>
+            <div class="ui-card showcase__card-a" data-depth="1.5">
+              <div class="ui-card__top">
+                <span class="ui-card__icon"><svg class="icon"><use href="#i-inbox"/></svg></span>
+                <div><strong>Nuova pre-iscrizione</strong><small>Patente B · dal sito, alle 21:40</small></div>
+              </div>
+              <div><span class="ui-chip ui-chip--ok">Dati completi</span></div>
+            </div>
+            <div class="ui-card showcase__card-b" data-depth="1.2">
+              <div class="ui-card__top">
+                <span class="ui-card__icon"><svg class="icon"><use href="#i-calendar"/></svg></span>
+                <div><strong>Guide di domani</strong><small>Segreteria e istruttori</small></div>
+              </div>
+              <div class="ui-slots">
+                <div class="ui-slot"><time>09:00</time><span>Patente B</span><span class="ui-chip ui-chip--ok">Confermata</span></div>
+                <div class="ui-slot"><time>11:30</time><span>Patente A2</span><span class="ui-chip ui-chip--warn">Da confermare</span></div>
+                <div class="ui-slot"><time>15:00</time><span>Libero</span><span class="ui-chip">Prenotabile</span></div>
+              </div>
+            </div>
+          </div>
+          <figcaption data-enter style="--i:6">Schermate reali di un nostro progetto dimostrativo. Le schede in primo piano sono esempi.</figcaption>
+        </figure>
       </div>
     </section>
 
-    <!-- ============ IL PROBLEMA ============ -->
-    <section class="section section--tint" id="problemi" aria-labelledby="problemi-title">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">Il problema</p>
+    <!-- ============ 01 IL PROBLEMA ============ -->
+    <section class="section section--white" id="problemi" aria-labelledby="problemi-title">
+      <div class="container problem">
+        <div class="head" data-reveal>
+          <p class="kicker"><span class="kicker__n">01</span> Il problema</p>
           <h2 id="problemi-title">Le domande che vi fanno ogni giorno.</h2>
           <p class="lead">Ogni telefonata per un'informazione già scritta è tempo tolto alla segreteria. Ecco dove il sito vi aiuta.</p>
         </div>
-        <ul class="pains pains--4" role="list">
-          <li class="pain" data-reveal>
-            <span class="pain__icon"><svg class="icon" aria-hidden="true"><use href="#i-euro"/></svg></span>
+        <ol class="problems" role="list">
+          <li data-reveal>
+            <span class="problems__n" aria-hidden="true">01</span>
             <h3>«Quanto costa la patente B?»</h3>
             <p>Telefonate su prezzi e pacchetti, a tutte le ore.</p>
-            <p class="pain__fix"><strong>Con il sito:</strong> listino chiaro e cosa comprende ogni pacchetto.</p>
+            <p class="problems__fix"><strong>Con il sito:</strong> listino chiaro e cosa comprende ogni pacchetto.</p>
           </li>
-          <li class="pain" data-reveal>
-            <span class="pain__icon"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg></span>
+          <li data-reveal>
+            <span class="problems__n" aria-hidden="true">02</span>
             <h3>«Cosa devo portare?»</h3>
             <p>Documenti e orari spiegati ogni volta da capo.</p>
-            <p class="pain__fix"><strong>Con il sito:</strong> elenco dei documenti per ogni patente, da stampare, e orari sempre aggiornati.</p>
+            <p class="problems__fix"><strong>Con il sito:</strong> elenco dei documenti per ogni patente, da stampare, e orari sempre aggiornati.</p>
           </li>
-          <li class="pain" data-reveal>
-            <span class="pain__icon"><svg class="icon" aria-hidden="true"><use href="#i-inbox"/></svg></span>
+          <li data-reveal>
+            <span class="problems__n" aria-hidden="true">03</span>
             <h3>Iscrizioni raccolte a mano</h3>
             <p>Dati presi al telefono, su fogli e messaggi.</p>
-            <p class="pain__fix"><strong>Con il sito:</strong> pre-iscrizione online, anche la sera, che arriva già completa.</p>
+            <p class="problems__fix"><strong>Con il sito:</strong> pre-iscrizione online, anche la sera, che arriva già completa.</p>
           </li>
-          <li class="pain" data-reveal>
-            <span class="pain__icon"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>
+          <li data-reveal>
+            <span class="problems__n" aria-hidden="true">04</span>
             <h3>L'agenda delle guide</h3>
             <p>Spostamenti e disdette tra telefonate e WhatsApp.</p>
-            <p class="pain__fix"><strong>Con un gestionale:</strong> un'agenda condivisa tra segreteria e istruttori.</p>
+            <p class="problems__fix"><strong>Con un gestionale:</strong> un'agenda condivisa tra segreteria e istruttori.</p>
           </li>
-        </ul>
+        </ol>
       </div>
     </section>
 
-    <!-- ============ DEMO ============ -->
-    <section class="section" id="demo" aria-labelledby="demo-title">
+    <!-- ============ 02 DEMO ============ -->
+    <section class="section section--paper" id="demo" aria-labelledby="demo-title">
       <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">Demo per autoscuole</p>
+        <div class="head head--split" data-reveal>
+          <p class="kicker"><span class="kicker__n">02</span> Demo per autoscuole</p>
           <h2 id="demo-title">Provatele come farebbe un allievo.</h2>
-          <p class="lead">Sono siti dimostrativi di autoscuole di fantasia: tre stili diversi, tutti pensati per il telefono.</p>
+          <div>
+            <p class="lead">Tre progetti dimostrativi, tre stili diversi, tutti pensati prima di tutto per il telefono.</p>
+            <p class="demo-note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>Autoscuole di fantasia: nomi, prezzi e contatti sono inventati.</p>
+          </div>
         </div>
 
-        <div class="works">
-          <article class="work" data-reveal>
-            <div class="work__preview work__preview--panel">
-              <div class="device device--phone" inert aria-hidden="true">
-                <div class="device__screen" data-screen style="--ratio: 390 / 640">
-                  <iframe src="../demo/autoscuola-pistacchio/index.html" title="Anteprima del sito dimostrativo Autoscuola Pistacchio" loading="lazy" tabindex="-1" width="390" height="844"></iframe>
+        <div class="projects">
+          <article class="project project--pistacchio" data-reveal>
+            <figure class="project__media">
+              <a class="project__stage" href="../demo/autoscuola-pistacchio/index.html" tabindex="-1" aria-hidden="true" data-keep-src>
+                <div class="browser">
+                  <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">Demo · Autoscuola Pistacchio</span></div>
+                  <img src="../assets/anteprime/pistacchio-home-1280.webp" srcset="../assets/anteprime/pistacchio-home-640.webp 640w, ../assets/anteprime/pistacchio-home-1280.webp 1280w" sizes="(min-width: 1024px) 600px, 86vw" width="1280" height="800" alt="" loading="lazy" decoding="async">
                 </div>
-              </div>
-            </div>
-            <div class="work__body">
+                <div class="phone">
+                  <div class="phone__screen"><img src="../assets/anteprime/pistacchio-iscrizione-390.webp" srcset="../assets/anteprime/pistacchio-iscrizione-390.webp 390w, ../assets/anteprime/pistacchio-iscrizione-780.webp 780w" sizes="(min-width: 1024px) 180px, 27vw" width="390" height="844" alt="" loading="lazy" decoding="async"></div>
+                </div>
+              </a>
+              <figcaption>Nelle immagini: la home page e la pre-iscrizione dal telefono.</figcaption>
+            </figure>
+            <div class="project__body">
               <p class="badge">Progetto dimostrativo · attività di fantasia</p>
-              <h3 class="work__title">Autoscuola Pistacchio</h3>
-              <dl class="flow">
-                <div><dt>Il problema</dt><dd>Le iscrizioni arrivano a pezzi, tra telefonate e messaggi.</dd></div>
+              <h3 class="project__name">Autoscuola Pistacchio</h3>
+              <p class="project__style">Giovane e colorata, per chi prende la prima patente.</p>
+              <dl class="project__facts">
+                <div><dt>Il problema</dt><dd>Le iscrizioni arrivano a pezzi, tra telefonate, messaggi e fogli compilati a mano.</dd></div>
                 <div><dt>Cosa fa il sito</dt><dd>Pre-iscrizione in tre passaggi e lo strumento «Quale patente fa per te?».</dd></div>
                 <div><dt>Da provare</dt><dd>Fate la pre-iscrizione come farebbe un ragazzo di 17 anni.</dd></div>
               </dl>
-              <a class="btn btn--dark" href="../demo/autoscuola-pistacchio/index.html" data-keep-src>Provate la demo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only"> di Autoscuola Pistacchio</span></a>
+              <div class="project__actions">
+                <a class="btn btn--dark" href="../demo/autoscuola-pistacchio/index.html" data-keep-src>Apri la demo<span class="sr-only"> di Autoscuola Pistacchio</span> <svg class="icon icon--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <a class="link-arrow" href="../demo/autoscuola-pistacchio/iscrizione.html" data-keep-src>Prova la pre-iscrizione <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
             </div>
           </article>
 
-          <article class="work" data-reveal>
-            <div class="work__preview work__preview--panel">
-              <div class="device device--phone" inert aria-hidden="true">
-                <div class="device__screen" data-screen style="--ratio: 390 / 640">
-                  <iframe src="../demo/autoscuola-ardesia/index.html" title="Anteprima del sito dimostrativo Autoscuola Ardesia" loading="lazy" tabindex="-1" width="390" height="844"></iframe>
+          <article class="project project--flip project--ardesia" data-reveal>
+            <figure class="project__media">
+              <a class="project__stage" href="../demo/autoscuola-ardesia/index.html" tabindex="-1" aria-hidden="true" data-keep-src>
+                <div class="browser">
+                  <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">Demo · Autoscuola Ardesia</span></div>
+                  <img src="../assets/anteprime/ardesia-home-1280.webp" srcset="../assets/anteprime/ardesia-home-640.webp 640w, ../assets/anteprime/ardesia-home-1280.webp 1280w" sizes="(min-width: 1024px) 600px, 86vw" width="1280" height="800" alt="" loading="lazy" decoding="async">
                 </div>
-              </div>
-            </div>
-            <div class="work__body">
+                <div class="phone">
+                  <div class="phone__screen"><img src="../assets/anteprime/ardesia-documenti-390.webp" srcset="../assets/anteprime/ardesia-documenti-390.webp 390w, ../assets/anteprime/ardesia-documenti-780.webp 780w" sizes="(min-width: 1024px) 180px, 27vw" width="390" height="844" alt="" loading="lazy" decoding="async"></div>
+                </div>
+              </a>
+              <figcaption>Nelle immagini: la home page e la scelta dei documenti dal telefono.</figcaption>
+            </figure>
+            <div class="project__body">
               <p class="badge">Progetto dimostrativo · attività di fantasia</p>
-              <h3 class="work__title">Autoscuola Ardesia</h3>
-              <dl class="flow">
-                <div><dt>Il problema</dt><dd>La segreteria risponde tutto il giorno a domande su orari e documenti.</dd></div>
+              <h3 class="project__name">Autoscuola Ardesia</h3>
+              <p class="project__style">Classica e sobria, per un'autoscuola di paese che punta sulla fiducia.</p>
+              <dl class="project__facts">
+                <div><dt>Il problema</dt><dd>La segreteria risponde tutto il giorno alle stesse domande su orari e documenti.</dd></div>
                 <div><dt>Cosa fa il sito</dt><dd>Orari con «aperto ora», schede delle patenti e l'elenco dei documenti da stampare.</dd></div>
                 <div><dt>Da provare</dt><dd>Scegliete una patente e stampate l'elenco dei documenti.</dd></div>
               </dl>
-              <a class="btn btn--dark" href="../demo/autoscuola-ardesia/index.html" data-keep-src>Provate la demo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only"> di Autoscuola Ardesia</span></a>
+              <div class="project__actions">
+                <a class="btn btn--dark" href="../demo/autoscuola-ardesia/index.html" data-keep-src>Apri la demo<span class="sr-only"> di Autoscuola Ardesia</span> <svg class="icon icon--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <a class="link-arrow" href="../demo/autoscuola-ardesia/index.html#documenti" data-keep-src>Vai ai documenti <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
             </div>
           </article>
 
-          <article class="work" data-reveal>
-            <div class="work__preview work__preview--panel">
-              <div class="device device--phone" inert aria-hidden="true">
-                <div class="device__screen" data-screen style="--ratio: 390 / 640">
-                  <iframe src="../demo/autoscuole-crocevia/index.html" title="Anteprima del sito dimostrativo Autoscuola Crocevia" loading="lazy" tabindex="-1" width="390" height="844"></iframe>
+          <article class="project project--crocevia" data-reveal>
+            <figure class="project__media">
+              <a class="project__stage" href="../demo/autoscuole-crocevia/index.html" tabindex="-1" aria-hidden="true" data-keep-src>
+                <div class="browser">
+                  <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">Demo · Autoscuola Crocevia</span></div>
+                  <img src="../assets/anteprime/crocevia-home-1280.webp" srcset="../assets/anteprime/crocevia-home-640.webp 640w, ../assets/anteprime/crocevia-home-1280.webp 1280w" sizes="(min-width: 1024px) 600px, 86vw" width="1280" height="800" alt="" loading="lazy" decoding="async">
                 </div>
-              </div>
-            </div>
-            <div class="work__body">
+                <div class="phone">
+                  <div class="phone__screen"><img src="../assets/anteprime/crocevia-quiz-390.webp" srcset="../assets/anteprime/crocevia-quiz-390.webp 390w, ../assets/anteprime/crocevia-quiz-780.webp 780w" sizes="(min-width: 1024px) 180px, 27vw" width="390" height="844" alt="" loading="lazy" decoding="async"></div>
+                </div>
+              </a>
+              <figcaption>Nelle immagini: la home page e il quiz di teoria dal telefono.</figcaption>
+            </figure>
+            <div class="project__body">
               <p class="badge">Progetto dimostrativo · attività di fantasia</p>
-              <h3 class="work__title">Autoscuola Crocevia</h3>
-              <dl class="flow">
+              <h3 class="project__name">Autoscuola Crocevia</h3>
+              <p class="project__style">Moderna, quasi un'app, per chi fa tutto dal telefono.</p>
+              <dl class="project__facts">
                 <div><dt>Il problema</dt><dd>Chi vuole iscriversi la sera trova la segreteria chiusa.</dd></div>
                 <div><dt>Cosa fa il sito</dt><dd>Pre-iscrizione online in cinque passaggi e un quiz di teoria per allenarsi.</dd></div>
                 <div><dt>Da provare</dt><dd>Fate il quiz di dieci domande, poi la pre-iscrizione dal telefono.</dd></div>
               </dl>
-              <a class="btn btn--dark" href="../demo/autoscuole-crocevia/index.html" data-keep-src>Provate la demo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only"> di Autoscuola Crocevia</span></a>
+              <div class="project__actions">
+                <a class="btn btn--dark" href="../demo/autoscuole-crocevia/index.html" data-keep-src>Apri la demo<span class="sr-only"> di Autoscuola Crocevia</span> <svg class="icon icon--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                <a class="link-arrow" href="../demo/autoscuole-crocevia/index.html#quiz" data-keep-src>Prova il quiz <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
             </div>
           </article>
         </div>
-
-        <div class="cta-band" data-reveal>
-          <div>
-            <h3>Volete un sito così per la vostra autoscuola?</h3>
-            <p>Partiamo da una di queste demo o da zero, con i vostri prezzi, orari e sedi.</p>
-          </div>
-          <a class="btn btn--primary btn--lg" href="https://wa.me/393472261131?text=Ciao%20Next%20Siteo%2C%20ho%20visto%20le%20demo%20per%20autoscuole%20e%20vorrei%20qualcosa%20di%20simile." target="_blank" rel="noopener" data-wa="Ciao Next Siteo, ho visto le demo per autoscuole e vorrei qualcosa di simile.">
-            <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg> Scriveteci su WhatsApp<span class="sr-only"> (si apre in una nuova scheda)</span>
-          </a>
-        </div>
       </div>
     </section>
 
-    <!-- ============ NON SOLO SITI ============ -->
-    <section class="section section--white" id="servizi" aria-labelledby="servizi-title">
+    <!-- ============ 03 NON SOLO SITI ============ -->
+    <section class="section on-night solution" id="servizi" aria-labelledby="servizi-title">
       <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">Non solo siti</p>
+        <div class="head head--split" data-reveal>
+          <p class="kicker"><span class="kicker__n">03</span> Non solo siti</p>
           <h2 id="servizi-title">Strumenti fatti per un'autoscuola.</h2>
+          <p class="lead">Si può partire dal sito e aggiungere il resto dopo, quando serve.</p>
         </div>
-        <ul class="pains" role="list">
-          <li class="tile" data-reveal>
-            <span class="tile__icon"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>
-            <h3>Pre-iscrizioni online</h3>
-            <p>Dati, patente e disponibilità raccolti dal telefono, in pochi passaggi.</p>
+        <ul class="services services--3" role="list">
+          <li data-reveal>
+            <article class="service">
+              <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>
+              <h3>Pre-iscrizioni online</h3>
+              <p>Dati, patente e disponibilità raccolti dal telefono, in pochi passaggi.</p>
+            </article>
           </li>
-          <li class="tile tile--soft" data-reveal>
-            <span class="tile__icon"><svg class="icon" aria-hidden="true"><use href="#i-apps"/></svg></span>
-            <h3>Quiz e strumenti per gli allievi</h3>
-            <p>Un quiz per allenarsi, l'elenco dei documenti: motivi per tornare sul vostro sito.</p>
+          <li data-reveal>
+            <article class="service">
+              <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-apps"/></svg></span>
+              <h3>Quiz e strumenti per gli allievi</h3>
+              <p>Un quiz per allenarsi, l'elenco dei documenti: motivi per tornare sul vostro sito.</p>
+            </article>
           </li>
-          <li class="tile" data-reveal>
-            <span class="tile__icon"><svg class="icon" aria-hidden="true"><use href="#i-layout"/></svg></span>
-            <h3>Agenda delle guide</h3>
-            <p>Un gestionale su misura, condiviso tra segreteria e istruttori.</p>
+          <li data-reveal>
+            <article class="service">
+              <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-layout"/></svg></span>
+              <h3>Agenda delle guide</h3>
+              <p>Un gestionale su misura, condiviso tra segreteria e istruttori.</p>
+            </article>
           </li>
         </ul>
       </div>
     </section>
 
-    <!-- ============ COME LAVORIAMO ============ -->
-    <section class="section section--tint" id="metodo" aria-labelledby="metodo-title">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow">Come lavoriamo</p>
+    <!-- ============ 04 METODO ============ -->
+    <section class="section section--white" id="metodo" aria-labelledby="metodo-title">
+      <div class="container method">
+        <div class="head" data-reveal>
+          <p class="kicker"><span class="kicker__n">04</span> Metodo</p>
           <h2 id="metodo-title">Dalla prima chiamata al sito online.</h2>
+          <p class="lead">Un solo referente dall'inizio alla fine, e il saldo solo dopo che avete visto il sito finito.</p>
         </div>
-        <ol class="steps" role="list">
-          <li class="step" data-reveal>
-            <span class="step__icon"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
-            <h3>Una chiamata di 10 minuti</h3>
-            <p>Ci raccontate come lavora la vostra autoscuola e cosa vi fa perdere tempo.</p>
+        <ol class="timeline" role="list" data-timeline>
+          <li class="step">
+            <span class="step__n" aria-hidden="true">1</span>
+            <h3>La prima conversazione</h3>
+            <p>Una chiamata di 10 minuti: ci raccontate come lavora la vostra autoscuola e cosa vi fa perdere tempo.</p>
           </li>
-          <li class="step" data-reveal>
-            <span class="step__icon"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg></span>
-            <h3>Proposta e preventivo gratuito</h3>
+          <li class="step">
+            <span class="step__n" aria-hidden="true">2</span>
+            <h3>Proposta e preventivo</h3>
             <p>Vi mandiamo per iscritto cosa faremo, in quanto tempo e a che costo. Gratis e senza impegno.</p>
           </li>
-          <li class="step" data-reveal>
-            <span class="step__icon"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg></span>
+          <li class="step">
+            <span class="step__n" aria-hidden="true">3</span>
             <h3>Realizzazione</h3>
-            <p>Costruiamo il sito con i vostri prezzi, orari e documenti, e ve lo facciamo vedere mentre prende forma.</p>
+            <p>Costruiamo il sito con i vostri prezzi, orari e documenti, e ve lo mostriamo mentre prende forma.</p>
           </li>
-          <li class="step" data-reveal>
-            <span class="step__icon"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg></span>
-            <h3>Online e assistenza</h3>
-            <p>Il saldo arriva dopo che avete visto il sito finito. Poi lo pubblichiamo e restiamo a disposizione.</p>
+          <li class="step">
+            <span class="step__n" aria-hidden="true">4</span>
+            <h3>Pubblicazione</h3>
+            <p>Il saldo arriva dopo che avete visto il sito finito. Poi lo mettiamo online, sul dominio intestato a voi.</p>
+          </li>
+          <li class="step">
+            <span class="step__n" aria-hidden="true">5</span>
+            <h3>Assistenza</h3>
+            <p>Restiamo a disposizione per aggiornare prezzi, orari e avvisi quando cambiano.</p>
           </li>
         </ol>
-        <ul class="promises promises--boxed" role="list" aria-label="Cosa vi garantiamo" data-reveal>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>Preventivo scritto con tempi e costi</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg>Il dominio resta vostro</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg>Vedete il sito prima che vada online</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Risposta entro 24-48 ore</li>
-        </ul>
       </div>
     </section>
 
-    <!-- ============ FAQ ============ -->
-    <section class="section section--white" id="faq" aria-labelledby="faq-title">
+    <!-- ============ 05 FAQ ============ -->
+    <section class="section section--paper" id="faq" aria-labelledby="faq-title">
       <div class="container faq">
-        <div class="faq__head" data-reveal>
-          <h2 id="faq-title">Domande frequenti delle autoscuole.</h2>
-          <p class="lead">Non trovate la vostra? Scriveteci, vi rispondiamo volentieri.</p>
+        <div class="head" data-reveal>
+          <p class="kicker"><span class="kicker__n">05</span> Domande frequenti</p>
+          <h2 id="faq-title">Le domande delle autoscuole.</h2>
+          <p class="lead">Non trovate la vostra? Scriveteci: vi rispondiamo volentieri, senza impegno.</p>
           <a class="link-arrow" href="#contatti">Fate una domanda <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
         <div class="faq__list" data-reveal>
           <details class="faq__item">
-            <summary><h3 class="faq__q">Potete mettere sul sito i prezzi delle patenti?</h3><svg class="icon faq__sign" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <p>Sì, se volete: prezzi, cosa comprende ogni pacchetto e cosa è escluso. Decidete voi quanto mostrare.</p>
+            <summary><h3 class="faq__q">Potete mettere sul sito i prezzi delle patenti?</h3><span class="faq__sign" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
+            <p class="faq__a">Sì, se volete: prezzi, cosa comprende ogni pacchetto e cosa è escluso. Decidete voi quanto mostrare.</p>
           </details>
           <details class="faq__item">
-            <summary><h3 class="faq__q">Il sito può raccogliere le pre-iscrizioni?</h3><svg class="icon faq__sign" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <p>Sì. Gli allievi lasciano dati, patente e disponibilità dal telefono, anche la sera. Voi ricevete la richiesta già completa.</p>
+            <summary><h3 class="faq__q">Il sito può raccogliere le pre-iscrizioni?</h3><span class="faq__sign" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
+            <p class="faq__a">Sì. Gli allievi lasciano dati, patente e disponibilità dal telefono, anche la sera. Voi ricevete la richiesta già completa.</p>
           </details>
           <details class="faq__item">
-            <summary><h3 class="faq__q">Si può gestire l'agenda delle guide?</h3><svg class="icon faq__sign" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <p>Sì, con un gestionale su misura: un'agenda condivisa tra segreteria e istruttori, fatta sul vostro modo di lavorare. Ne parliamo nel preventivo.</p>
+            <summary><h3 class="faq__q">Si può gestire l'agenda delle guide?</h3><span class="faq__sign" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
+            <p class="faq__a">Sì, con un gestionale su misura: un'agenda condivisa tra segreteria e istruttori, fatta sul vostro modo di lavorare. Ne parliamo nel preventivo.</p>
           </details>
           <details class="faq__item">
-            <summary><h3 class="faq__q">Gli allievi devono scaricare un'app?</h3><svg class="icon faq__sign" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <p>No. Funziona tutto dal browser del telefono, senza installare niente.</p>
+            <summary><h3 class="faq__q">Gli allievi devono scaricare un'app?</h3><span class="faq__sign" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
+            <p class="faq__a">No. Funziona tutto dal browser del telefono, senza installare niente.</p>
           </details>
           <details class="faq__item">
-            <summary><h3 class="faq__q">Quanto costa?</h3><svg class="icon faq__sign" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <p>Dipende da cosa vi serve: quante pagine, quali funzioni (pre-iscrizioni, quiz, agenda delle guide) e se testi e foto sono già pronti o vanno preparati. Il preventivo è gratuito, scritto e senza impegno. <a href="#contatti">Chiedetelo qui</a>.</p>
+            <summary><h3 class="faq__q">Quanto costa?</h3><span class="faq__sign" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
+            <p class="faq__a">Dipende da cosa vi serve: quante pagine, quali funzioni (pre-iscrizioni, quiz, agenda delle guide) e se testi e foto sono già pronti o vanno preparati. Il preventivo è gratuito, scritto e senza impegno. <a href="#contatti">Chiedetelo qui</a>.</p>
           </details>
           <details class="faq__item">
-            <summary><h3 class="faq__q">Posso vedere il sito prima di pagare tutto?</h3><svg class="icon faq__sign" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <p>Sì. Il pagamento è diviso in due parti: un acconto all'inizio e il saldo dopo che avete visto il sito finito.</p>
+            <summary><h3 class="faq__q">Posso vedere il sito prima di pagare tutto?</h3><span class="faq__sign" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
+            <p class="faq__a">Sì. Il pagamento è diviso in due parti: un acconto all'inizio e il saldo dopo che avete visto il sito finito.</p>
           </details>
           <details class="faq__item">
-            <summary><h3 class="faq__q">Lavorate anche fuori Milano?</h3><svg class="icon faq__sign" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <p>Sì. Lavoriamo a Milano e in tutte le zone vicine, e in alcuni casi anche fuori dalla Lombardia.</p>
+            <summary><h3 class="faq__q">Lavorate anche fuori Milano?</h3><span class="faq__sign" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
+            <p class="faq__a">Sì. Lavoriamo a Milano e in tutte le zone vicine, e in alcuni casi anche fuori dalla Lombardia.</p>
           </details>
         </div>
       </div>
     </section>
 
-    <!-- ============ CONTATTI ============ -->
-    <section class="section" id="contatti" aria-labelledby="contatti-title">
+    <!-- ============ 06 CONTATTI ============ -->
+    <section class="section on-night contact-section" id="contatti" aria-labelledby="contatti-title">
       <div class="container contact">
         <div class="contact__intro" data-reveal>
-          <p class="eyebrow">Contatti</p>
-          <h2 id="contatti-title">Parliamo della vostra autoscuola.</h2>
-          <p class="lead">Rispondiamo entro 24-48 ore, con una proposta chiara e senza impegno.</p>
+          <p class="kicker"><span class="kicker__n">06</span> Contatti</p>
+          <h2 id="contatti-title" class="contact__title">Parliamo della vostra autoscuola.</h2>
+          <p class="lead">Vi rispondiamo entro 24-48 ore con una proposta chiara e un preventivo gratuito, senza impegno.</p>
 
           <ul class="direct" role="list">
             <li>
               <a class="direct__link" href="https://wa.me/393472261131?text=Ciao%20Next%20Siteo%2C%20ho%20visto%20la%20pagina%20per%20autoscuole%20e%20vorrei%20informazioni." target="_blank" rel="noopener" data-wa="Ciao Next Siteo, ho visto la pagina per autoscuole e vorrei informazioni.">
-                <span class="direct__icon"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg></span>
+                <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg></span>
                 <span><strong>WhatsApp</strong><span class="direct__value">Il modo più veloce</span></span>
+                <svg class="icon direct__go" aria-hidden="true"><use href="#i-arrow"/></svg>
                 <span class="sr-only">(si apre in una nuova scheda)</span>
               </a>
             </li>
             <li>
               <a class="direct__link" href="tel:+393472261131">
-                <span class="direct__icon"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
+                <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
                 <span><strong>Telefono</strong><span class="direct__value">+39 347 226 1131</span></span>
+                <svg class="icon direct__go" aria-hidden="true"><use href="#i-arrow"/></svg>
               </a>
             </li>
             <li>
               <a class="direct__link" href="mailto:nextsiteo.office@gmail.com?subject=Sito%20per%20autoscuola">
-                <span class="direct__icon"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span>
+                <span class="icon-box"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span>
                 <span><strong>Email</strong><span class="direct__value">nextsiteo.office@gmail.com</span></span>
+                <svg class="icon direct__go" aria-hidden="true"><use href="#i-arrow"/></svg>
               </a>
             </li>
           </ul>
         </div>
 
         <div class="form-card" data-reveal>
-          <h3 class="form-card__title">Oppure compilate il modulo</h3>
-          <p class="form-card__hint">Bastano pochi dati. I campi con * sono obbligatori.</p>
+          <h3 class="form-card__title">Scriveteci qui</h3>
+          <p class="form-card__hint">Bastano nome e un recapito: il resto è facoltativo.</p>
 
           <!-- Stesso modulo della home: invia a Formspree (vedi README, punto 6) -->
           <form class="form" action="https://formspree.io/f/xrpeanrd" method="POST" novalidate data-contact-form>
@@ -505,27 +551,28 @@
                 <p class="field__error" id="f-nome-err" hidden></p>
               </div>
               <div class="field">
-                <label for="f-attivita">Autoscuola *</label>
-                <input id="f-attivita" name="attivita" type="text" autocomplete="organization" required aria-describedby="f-attivita-hint f-attivita-err">
-                <p class="field__hint" id="f-attivita-hint">Il nome della vostra autoscuola e la città.</p>
-                <p class="field__error" id="f-attivita-err" hidden></p>
+                <label for="f-contatto">Telefono o email *</label>
+                <input id="f-contatto" name="contatto" type="text" autocomplete="email" inputmode="email" required aria-describedby="f-contatto-hint f-contatto-err">
+                <p class="field__hint" id="f-contatto-hint">Quello che preferite: vi ricontattiamo lì.</p>
+                <p class="field__error" id="f-contatto-err" hidden></p>
               </div>
             </div>
 
             <div class="field">
-              <label for="f-contatto">Telefono o email *</label>
-              <input id="f-contatto" name="contatto" type="text" autocomplete="email" inputmode="email" required aria-describedby="f-contatto-hint f-contatto-err">
-              <p class="field__hint" id="f-contatto-hint">Scrivete quello che preferite: vi ricontattiamo lì.</p>
-              <p class="field__error" id="f-contatto-err" hidden></p>
+              <label for="f-attivita">Autoscuola <span class="field__opt">(facoltativo)</span></label>
+              <input id="f-attivita" name="attivita" type="text" autocomplete="organization" aria-describedby="f-attivita-hint">
+              <p class="field__hint" id="f-attivita-hint">Il nome della vostra autoscuola e la città.</p>
             </div>
 
             <fieldset class="field choices">
               <legend>Cosa vi serve? <span class="field__opt">(facoltativo)</span></legend>
-              <label class="choice"><input type="radio" name="servizio" value="Sito nuovo"> Sito nuovo</label>
-              <label class="choice"><input type="radio" name="servizio" value="Rifare il sito"> Rifare il sito</label>
-              <label class="choice"><input type="radio" name="servizio" value="Prenotazioni online"> Pre-iscrizioni online</label>
-              <label class="choice"><input type="radio" name="servizio" value="Gestionale"> Agenda delle guide</label>
-              <label class="choice"><input type="radio" name="servizio" value="Non so ancora"> Non so ancora</label>
+              <div class="choices__list">
+                <label class="choice"><input type="radio" name="servizio" value="Sito nuovo"> Sito nuovo</label>
+                <label class="choice"><input type="radio" name="servizio" value="Rifare il sito"> Rifare il sito</label>
+                <label class="choice"><input type="radio" name="servizio" value="Prenotazioni online"> Pre-iscrizioni online</label>
+                <label class="choice"><input type="radio" name="servizio" value="Gestionale"> Agenda delle guide</label>
+                <label class="choice"><input type="radio" name="servizio" value="Non so ancora"> Non so ancora</label>
+              </div>
             </fieldset>
 
             <div class="field">
@@ -543,16 +590,10 @@
             <input type="hidden" name="provenienza" value="autoscuole" data-provenienza>
             <input type="hidden" name="email" value="" data-reply-email>
 
-            <div class="field">
-              <label class="checkbox" for="f-privacy">
-                <input id="f-privacy" name="privacy" type="checkbox" value="accettata" required aria-describedby="f-privacy-err">
-                <span>Ho letto l'<a href="../privacy.html">informativa privacy</a> e acconsento al trattamento dei dati per ricevere una risposta. *</span>
-              </label>
-              <p class="field__error" id="f-privacy-err" hidden></p>
-            </div>
-
-            <div>
-              <button class="btn btn--primary btn--lg" type="submit" data-submit>Invia la richiesta <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <div class="form__submit">
+              <!-- Informativa, non consenso: i dati servono a rispondere a una vostra richiesta (art. 6.1.b GDPR) -->
+              <p class="form__privacy" id="f-privacy-note">Usiamo questi dati solo per rispondervi. Il modulo passa da Formspree, il servizio che ci inoltra il messaggio. Tutti i dettagli nell'<a href="../privacy.html">informativa privacy</a>.</p>
+              <div><button class="btn btn--primary btn--lg" type="submit" data-submit aria-describedby="f-privacy-note">Invia la richiesta <svg class="icon icon--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
             </div>
 
             <div class="form__status" data-form-status role="status" aria-live="polite" tabindex="-1" hidden></div>
@@ -572,25 +613,39 @@
           </svg>
           <span class="logo__word">Next Siteo</span>
         </a>
-        <p>Siti e strumenti digitali per attività locali. Milano e dintorni.</p>
+        <p>Siti e strumenti digitali su misura per attività locali. Milano e dintorni.</p>
       </div>
-      <address class="footer__contacts">
-        <a href="mailto:nextsiteo.office@gmail.com">nextsiteo.office@gmail.com</a>
-        <a href="tel:+393472261131">+39 347 226 1131</a>
-        <a href="https://wa.me/393472261131?text=Ciao%20Next%20Siteo%2C%20ho%20visto%20la%20pagina%20per%20autoscuole%20e%20vorrei%20informazioni." target="_blank" rel="noopener" data-wa="Ciao Next Siteo, ho visto la pagina per autoscuole e vorrei informazioni.">WhatsApp<span class="sr-only"> (si apre in una nuova scheda)</span></a>
-        <a href="#" target="_blank" rel="noopener" data-google-profile hidden>Scheda Google<span class="sr-only"> (si apre in una nuova scheda)</span></a>
-      </address>
-      <nav class="footer__links" aria-label="Link utili">
-        <a href="../index.html">Tutte le attività</a>
-        <a href="#demo">Demo per autoscuole</a>
-        <a href="#contatti">Preventivo gratuito</a>
-        <a href="../privacy.html">Privacy</a>
+      <nav class="footer__col" aria-labelledby="f-sito">
+        <h2 id="f-sito">Il sito</h2>
+        <ul role="list">
+          <li><a href="../index.html">Tutte le attività</a></li>
+          <li><a href="#demo">Demo per autoscuole</a></li>
+          <li><a href="#faq">Domande frequenti</a></li>
+        </ul>
+      </nav>
+      <div class="footer__col">
+        <h2 id="f-contatti">Contatti</h2>
+        <address>
+          <ul role="list" aria-labelledby="f-contatti">
+            <li><a href="mailto:nextsiteo.office@gmail.com">nextsiteo.office@gmail.com</a></li>
+            <li><a href="tel:+393472261131">+39 347 226 1131</a></li>
+            <li><a href="https://wa.me/393472261131?text=Ciao%20Next%20Siteo%2C%20ho%20visto%20la%20pagina%20per%20autoscuole%20e%20vorrei%20informazioni." target="_blank" rel="noopener" data-wa="Ciao Next Siteo, ho visto la pagina per autoscuole e vorrei informazioni.">WhatsApp<span class="sr-only"> (si apre in una nuova scheda)</span></a></li>
+            <li data-google-profile-item hidden><a href="#" target="_blank" rel="noopener" data-google-profile>Scheda Google<span class="sr-only"> (si apre in una nuova scheda)</span></a></li>
+          </ul>
+        </address>
+      </div>
+      <nav class="footer__col" aria-labelledby="f-legale">
+        <h2 id="f-legale">Informazioni</h2>
+        <ul role="list">
+          <li><a href="../privacy.html">Informativa privacy</a></li>
+          <li><a href="#contatti">Preventivo gratuito</a></li>
+        </ul>
       </nav>
     </div>
     <div class="container footer__legal">
       <p>© <span data-year>2026</span> Next Siteo</p>
       <!-- DATI FISCALI [DA COMPLETARE]: come nel footer della home -->
-      <p>Questo sito non usa cookie di tracciamento.</p>
+      <p>Nessun cookie di tracciamento, nessuna risorsa caricata da altri siti.</p>
     </div>
   </footer>
 
@@ -598,7 +653,7 @@
     <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg><span>WhatsApp</span><span class="sr-only"> (si apre in una nuova scheda)</span>
   </a>
 
-  <script src="../js/config.js" defer></script>
-  <script src="../js/main.js" defer></script>
+  <script src="../js/config.js?v=2026-10-17" defer></script>
+  <script src="../js/main.js?v=2026-10-17" defer></script>
 </body>
 </html>

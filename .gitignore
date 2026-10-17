@@ -3,3 +3,9 @@ design-system/
 
 # Impostazioni locali di Claude Code: con .nojekyll GitHub Pages pubblicherebbe anche le cartelle col punto
 .claude/
+
+# Screenshot prima/dopo del restyling (solo per la revisione, non vanno pubblicati)
+restyling-review/
+
+# Note di lavoro sulla privacy (restano su questo computer, non vanno pubblicate)
+PRIVACY_REVIEW.md

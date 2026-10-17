@@ -9,14 +9,15 @@ Il sito di Next Siteo: siti web e strumenti digitali su misura per attività loc
 ## Cosa c'è nella cartella
 
 ```
-index.html            la home: per chi lavoriamo, problema e soluzione, lavori, analisi gratuita, metodo, FAQ, contatti
+index.html            la home: hero, problema, soluzione, cosa cambia, progetti dimostrativi, metodo, perché noi, FAQ, contatti
 autoscuole/           pagina per le autoscuole (da linkare nelle email): è anche il modello per le altre nicchie
 privacy.html          informativa privacy (con le parti [DA COMPLETARE])
 404.html              pagina per gli indirizzi sbagliati
-css/style.css         colori, caratteri e impaginazione
+css/style.css         design system: colori, caratteri, componenti, animazioni (vedi punto 11)
 js/config.js          contatti, tempo di risposta, link al calendario, scheda Google e recensioni (un solo posto)
-js/main.js            menu, animazioni, anteprime, provenienza (?src=), recensioni, WhatsApp fisso e modulo contatti
-assets/               favicon, immagine di anteprima per WhatsApp, illustrazioni, font
+js/main.js            menu, animazioni, linea del tempo, provenienza (?src=), recensioni, WhatsApp fisso e modulo contatti
+assets/               favicon, immagine di anteprima per WhatsApp, font
+  anteprime/          schermate delle demo in WebP (computer e telefono), usate nella home e nella pagina autoscuole
 demo/
   comune/            barra "Sito dimostrativo..." con "Voglio un sito così" e la finestra "Questa è una demo di Next Siteo", per tutte le demo
   autoscuola-pistacchio/   demo moderna: pre-iscrizione a step, «Quale patente fa per te?», WhatsApp
@@ -24,12 +25,12 @@ demo/
   autoscuole-crocevia/     demo moderna a pagina unica: pre-iscrizione in cinque passaggi, quiz di teoria, FAQ, WhatsApp
 sitemap.xml           elenco delle pagine per Google
 robots.txt            istruzioni per i motori di ricerca
-.gitignore            file e cartelle da non pubblicare (impostazioni locali e design system di lavoro)
+.gitignore            file e cartelle da non pubblicare (impostazioni locali, design system di lavoro, screenshot di revisione)
 ```
 
 Tutti i collegamenti sono **relativi**: il sito funziona sia su `nomeutente.github.io` sia su `nomeutente.github.io/nome-repo/`.
 
-**Provarlo sul computer:** aprite un terminale nella cartella e scrivete `python3 -m http.server`, poi andate su http://localhost:8000 . (Aprire `index.html` con un doppio clic funziona quasi del tutto, ma le anteprime delle demo vanno meglio con il comando.)
+**Provarlo sul computer:** aprite un terminale nella cartella e scrivete `python3 -m http.server` (su Windows `py -m http.server`), poi andate su http://localhost:8000 . Aprire `index.html` con un doppio clic funziona quasi del tutto, ma il comando riproduce meglio GitHub Pages.
 
 ---
 
@@ -179,7 +180,9 @@ Per ogni file: aprite il file su GitHub, cliccate la **matita**, cercate `NOMEUT
 
 **Sostituire un file intero** (per esempio un'immagine): **Add file**, poi **Upload files**, trascinate il file con lo stesso nome e nella stessa cartella. GitHub sovrascrive quello vecchio.
 
-**Colori e caratteri:** sono all'inizio di `css/style.css`, nella sezione `:root`. Per esempio `--accent` è il blu dei pulsanti.
+**Colori e caratteri:** sono all'inizio di `css/style.css`, nella sezione `:root`. Per esempio `--cobalt` è il blu dei pulsanti (vedi il punto 11).
+
+**Dopo aver cambiato `css/style.css` o un file in `js/`:** aggiornate il numero di versione nei collegamenti (`style.css?v=2026-10-17`, `main.js?v=...`, `config.js?v=...`) in `index.html`, `autoscuole/index.html` e `privacy.html`, per esempio con la data del giorno. Così chi ha già visitato il sito scarica subito i file nuovi invece di usare quelli vecchi rimasti in memoria nel browser.
 
 **Dati fiscali (P.IVA):** in fondo a `index.html`, nel footer, c'è un commento `DATI FISCALI [DA COMPLETARE]` con il testo da inserire.
 
@@ -191,7 +194,8 @@ Per ogni file: aprite il file su GitHub, cliccate la **matita**, cercate `NOMEUT
    <script src="../comune/barra-demo.js" defer></script>
    ```
    La barra "Sito dimostrativo realizzato da Next Siteo" compare da sola. Per moduli e pulsanti finti basta aggiungere l'attributo `data-demo-avviso` (vedi le demo esistenti).
-3. In `index.html`, nella sezione **Lavori**, copiate un blocco `<article class="work">` e cambiate titolo, testi e i due percorsi `demo/...`.
+3. Preparate due schermate in WebP in `assets/anteprime/` (vedi il punto 11, «Anteprime delle demo»).
+4. In `index.html`, nella sezione **Progetti dimostrativi**, copiate un blocco `<article class="project">` e cambiate nome, testi, percorsi `demo/...` e immagini.
 
 **Regole da rispettare anche nelle prossime demo:** attività di fantasia, telefoni tipo `000 000 0000`, nessuna recensione, testimonianza o numero inventato, e l'etichetta "Progetto dimostrativo" ben visibile.
 
@@ -202,14 +206,14 @@ Per ogni file: aprite il file su GitHub, cliccate la **matita**, cercate `NOMEUT
 **Aggiungere una nicchia** (per esempio i barbieri):
 1. Copiate la cartella `autoscuole/` e chiamatela `barbieri/`.
 2. Nel nuovo `index.html` cambiate: `<title>`, meta description (al massimo 155 caratteri), `canonical`, `og:url`, `og:title`, `og:description`, il JSON-LD, `data-pagina="barbieri"` nel `<body>`, i problemi tipici, le demo, le FAQ (e il blocco FAQPage nel `<head>`: deve dire le stesse cose) e i messaggi WhatsApp (`data-wa="Ciao Next Siteo, ho visto la pagina per barbieri..."`).
-3. Nella home, nella sezione **Per chi lavoriamo**, copiate una card e fatela puntare a `barbieri/`.
+3. Nella home, in fondo alla sezione **Progetti dimostrativi**, copiate una card `<li class="sector">` e fatela puntare a `barbieri/`.
 4. Aggiungete `https://nextsiteo.github.io/barbieri/` in `sitemap.xml`.
 Per i **saloni benessere** la card nella home è già pronta, dentro un commento: quando ci sono le demo, togliete il commento e create `saloni-benessere/` come sopra.
 
 **Link nelle email:** aggiungete `?src=` con un nome breve, per esempio `https://nextsiteo.github.io/autoscuole/?src=email-autoscuole`. Il nome finisce nel campo nascosto «provenienza» del modulo e in fondo ai messaggi WhatsApp (per esempio «[da: email-autoscuole · autoscuole]»), anche se la persona passa dalla home alle demo. Niente cookie: il parametro viaggia solo nei link.
 
 **`js/config.js`:**
-- `calendario`: incollate il link **pubblico** di una pagina di prenotazione (per esempio una «pagina di prenotazione» di Google Calendar, che inizia con `https://calendar.app.google/`). Il link della vista settimana del vostro calendario non va bene: chi lo apre vede solo una pagina di accesso. Con il link compilato, il pulsante «Richiedi un preventivo gratuito» dell'hero diventa «Prenotate una chiamata di 10 minuti».
+- `calendario`: incollate il link **pubblico** di una pagina di prenotazione (per esempio una «pagina di prenotazione» di Google Calendar, che inizia con `https://calendar.app.google/`). Il link della vista settimana del vostro calendario non va bene: chi lo apre vede solo una pagina di accesso. Con il link compilato, nella sezione Contatti compare il link «Prenotate una chiamata di 10 minuti» (finché è vuoto resta nascosto).
 - `rispostaEntro`: il tempo di risposta del messaggio dopo l'invio del modulo. Se lo cambiate, cambiatelo anche nei testi della home e della pagina autoscuole (cercate «24-48 ore»).
 - `schedaGoogle`: il link alla scheda Google, quando esiste: compare nel footer.
 - `recensioni`: solo recensioni vere, copiate dalla scheda Google. Finché l'elenco è vuoto la sezione Recensioni non si vede.
@@ -226,7 +230,7 @@ Per i **saloni benessere** la card nella home è già pronta, dentro un commento
 - [ ] La privacy è completa: nessun `[DA COMPLETARE]` rimasto in `privacy.html`, data di aggiornamento inserita.
 - [ ] I dati fiscali (P.IVA e ragione sociale) sono nel footer, se dovete mostrarli.
 - [ ] I tre pulsanti di contatto funzionano dal telefono: WhatsApp apre la chat con il messaggio già scritto, il telefono chiama il numero giusto, l'email si apre con l'oggetto.
-- [ ] Le tre demo si aprono dalla sezione **Lavori** e da ognuna "Torna a Next Siteo" riporta indietro.
+- [ ] Le tre demo si aprono dalla sezione **Progetti dimostrativi** e da ognuna "Torna a Next Siteo" riporta indietro.
 - [ ] Mandando il link su WhatsApp compaiono titolo, descrizione e immagine di anteprima.
 - [ ] Avete letto la home dall'inizio alla fine sul telefono, cercando errori di battitura.
 
@@ -236,5 +240,41 @@ Per i **saloni benessere** la card nella home è già pronta, dentro un commento
 
 - **Font:** Manrope (sito), Bricolage Grotesque e Figtree (demo Pistacchio), caratteri di sistema per le demo Ardesia e Crocevia (non scaricano nulla). Manrope, Bricolage e Figtree sono font di Google Fonts con licenza SIL Open Font License, scaricati e serviti dal sito stesso: il browser non contatta Google. Le licenze sono accanto ai file dei font.
 - **Nessun cookie** e nessuno strumento di statistica: per questo non c'è il banner dei cookie. Se in futuro aggiungete Google Analytics o simili, servono banner e aggiornamento della privacy.
-- **Animazioni:** discrete, e disattivate per chi ha attivato "riduci movimento" nelle impostazioni del telefono o del computer.
-- **Accessibilità:** contrasti verificati, navigazione da tastiera, etichette nei moduli, testo alternativo per le immagini.
+- **Nessuna richiesta a siti esterni all'apertura delle pagine:** font, immagini, CSS e JavaScript sono tutti nel repository. Le uniche connessioni esterne partono da un'azione di chi visita: invio del modulo (Formspree), link a WhatsApp, telefono, email. Prima di aggiungere qualcosa da un CDN, una mappa, un video incorporato o uno strumento di statistica, valutatene l'impatto sulla privacy: può servire il banner dei cookie e va aggiornata l'informativa.
+- **Modulo:** due campi obbligatori (nome e telefono o email). Non c'è una casella di consenso obbligatoria: i dati servono a rispondere a una richiesta della persona (art. 6.1.b GDPR), quindi sotto il pulsante c'è un'informativa breve con il link alla privacy. I testi dei visitatori vengono inseriti nella pagina solo come testo, mai come HTML.
+- **Accessibilità (obiettivo WCAG 2.2 AA):** contrasti verificati, un solo H1 per pagina, navigazione da tastiera con focus visibile, etichette e messaggi di errore nei moduli, bersagli tattili di almeno 44 px, rispetto di «riduci movimento».
+- **Anteprime delle demo:** immagini statiche al posto degli iframe, per non caricare tre siti interi dentro la home.
+
+---
+
+## 11. Design system e animazioni
+
+**Idea visiva:** «progetto tecnico». Fondo carta chiaro (`--paper`), inchiostro scuro (`--ink`), un solo accento blu cobalto (`--cobalt`, #1F45E0), griglie sottili da tavola tecnica e sezioni «notte» (`.on-night`) per dare ritmo. Un solo font: Manrope (400-800).
+
+**Token principali** (in `:root`, all'inizio di `css/style.css`):
+
+| Token | A cosa serve |
+|---|---|
+| `--paper`, `--white`, `--mist` | fondi chiari |
+| `--ink`, `--ink-2`, `--muted` | testo principale, secondario, note |
+| `--cobalt`, `--cobalt-600`, `--cobalt-50` | accento, hover, fondi tenui |
+| `--night`, `--night-2`, `--on-night`, `--cobalt-night` | sezioni scure e testi su fondo scuro |
+| `--fs-display`, `--fs-h2`, `--fs-lead` | scala tipografica (fluida, con `clamp`) |
+| `--r-sm` … `--r-xl` | raggi degli angoli |
+| `--ease-out`, `--t-fast`, `--t-mid`, `--t-slow` | curve e durate delle animazioni |
+
+**Componenti** (classi riutilizzabili): `.btn` (`--primary`, `--dark`, `--night`, `--lg`, `--sm`), `.kicker` con numero di sezione, `.head` e `.head--split` (titolo a sinistra, testo a destra), `.browser` e `.phone` (cornici delle anteprime), `.ui-card` (schede illustrative), `.problems`, `.services`, `.compare` (prima/dopo), `.project`, `.timeline`, `.reason`, `.faq__item`, `.form-card`.
+
+**Una sola azione principale:** il pulsante blu pieno è riservato a «Richiedi un preventivo gratuito» e all'invio del modulo. Le demo usano il pulsante scuro (`.btn--dark`).
+
+**Animazioni** (solo CSS e JavaScript vanilla, nessuna libreria):
+- entrata della hero a cascata (solo CSS: funziona anche senza JavaScript);
+- comparsa delle sezioni allo scroll, con un piccolo ritardo tra elementi vicini (`data-reveal`);
+- leggera profondità dei dispositivi della hero seguendo il mouse (solo computer, attributo `data-depth`);
+- linea del tempo del metodo che si riempie scorrendo (`data-timeline`);
+- nella sezione «Cosa cambia», il «prima» si cancella con un tratto leggero;
+- hover discreti su card, anteprime, pulsanti e link con freccia.
+
+Con «riduci movimento» attivo non si muove nulla e tutto è subito visibile. Se `js/main.js` non si carica, dopo 3 secondi un piccolo script nella `<head>` mostra comunque tutto il contenuto.
+
+**Anteprime delle demo** (`assets/anteprime/`): per ogni demo una schermata da computer (1280×800, più una versione larga 640) e una da telefono (390×844 a densità doppia, più una larga 390), in WebP. Per rifarle: aprite la demo in Chrome, nascondete la barra demo, usate gli Strumenti per sviluppatori (modalità dispositivo con le dimensioni indicate, poi «Acquisisci screenshot») e convertite in WebP con qualità 75-80, mantenendo gli stessi nomi dei file.

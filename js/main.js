@@ -1,26 +1,50 @@
 /* ==================================================================
    NEXT SITEO · SCRIPT (JavaScript vanilla, nessuna libreria)
-   - menu mobile
-   - bordo dell'header dopo lo scroll (IntersectionObserver)
-   - comparsa delle sezioni allo scroll (rispetta prefers-reduced-motion)
-   - scala delle anteprime delle demo dentro le cornici
+   - menu mobile e voce attiva del menu mentre si scorre
+   - header con bordo dopo lo scroll
+   - comparsa delle sezioni allo scroll, con piccolo ritardo a cascata
+   - linea del tempo del metodo che si riempie scorrendo
+   - leggera profondità dei dispositivi nella hero (solo mouse, solo
+     senza "riduci movimento")
    - provenienza (?src=) nei messaggi WhatsApp e nel modulo, senza cookie
    - recensioni da js/config.js (sezione nascosta se l'elenco è vuoto)
    - bottone WhatsApp fisso, nascosto quando i Contatti sono visibili
    - modulo contatti: Formspree con fetch, oppure email già compilata
+   Tutto il testo inserito nella pagina passa da textContent:
+   niente HTML costruito con i dati scritti dai visitatori.
    ================================================================== */
 (function () {
   'use strict';
+
+  // Segnala alla <head> che lo script è partito (altrimenti dopo 3 secondi si mostra tutto)
+  window.NEXTSITEO_PRONTO = true;
 
   var C = window.NEXTSITEO || {};
   var NUMERO = C.whatsapp || '393472261131';
   var EMAIL = C.email || 'nextsiteo.office@gmail.com';
   var RISPOSTA = C.rispostaEntro || '';
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
+
+  // Piccolo aiuto per creare elementi senza innerHTML
+  var el = function (tag, attrs, children) {
+    var node = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      if (k === 'text') node.textContent = attrs[k];
+      else node.setAttribute(k, attrs[k]);
+    });
+    (children || []).forEach(function (c) {
+      node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+    });
+    return node;
+  };
+  var isHttps = function (url) {
+    return /^https:\/\/[^\s"'<>]+$/.test(String(url || ''));
+  };
 
   /* ---------- Anno nel footer ---------- */
-  document.querySelectorAll('[data-year]').forEach(function (el) {
-    el.textContent = String(new Date().getFullYear());
+  document.querySelectorAll('[data-year]').forEach(function (n) {
+    n.textContent = String(new Date().getFullYear());
   });
 
   /* ---------- Provenienza: parametro ?src= e pagina, senza cookie né salvataggi ---------- */
@@ -55,21 +79,21 @@
     });
   }
 
-  /* ---------- Link al calendario (se configurato) ---------- */
-  if (C.calendario) {
-    document.querySelectorAll('[data-cta-call]').forEach(function (a) {
+  /* ---------- Link al calendario e scheda Google (solo se configurati in js/config.js) ---------- */
+  if (isHttps(C.calendario)) {
+    document.querySelectorAll('[data-calendar]').forEach(function (a) {
       a.href = C.calendario;
       a.target = '_blank';
       a.rel = 'noopener';
-      a.textContent = 'Prenotate una chiamata di 10 minuti';
+      a.hidden = false;
     });
   }
-
-  /* ---------- Scheda Google (se configurata) ---------- */
-  if (C.schedaGoogle) {
+  if (isHttps(C.schedaGoogle)) {
     document.querySelectorAll('[data-google-profile]').forEach(function (a) {
       a.href = C.schedaGoogle;
       a.hidden = false;
+      var item = a.closest('[data-google-profile-item]');
+      if (item) item.hidden = false;
     });
   }
 
@@ -78,24 +102,33 @@
   var menu = document.querySelector('[data-menu]');
   if (toggle && menu) {
     var label = toggle.querySelector('.sr-only');
-    var setMenu = function (open) {
+    var isOpen = function () {
+      return toggle.getAttribute('aria-expanded') === 'true';
+    };
+    var setMenu = function (open, focusToggle) {
       toggle.setAttribute('aria-expanded', String(open));
       if (label) label.textContent = open ? 'Chiudi il menu' : 'Apri il menu';
       menu.hidden = !open;
+      if (open) {
+        var first = menu.querySelector('a');
+        if (first) first.focus();
+      } else if (focusToggle) {
+        toggle.focus();
+      }
     };
     toggle.addEventListener('click', function () {
-      setMenu(toggle.getAttribute('aria-expanded') !== 'true');
+      setMenu(!isOpen());
     });
     menu.addEventListener('click', function (e) {
       if (e.target.closest('a')) setMenu(false);
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-        setMenu(false);
-        toggle.focus();
-      }
+      if (e.key === 'Escape' && isOpen()) setMenu(false, true);
     });
-    window.matchMedia('(min-width: 960px)').addEventListener('change', function (mq) {
+    document.addEventListener('click', function (e) {
+      if (isOpen() && !menu.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
+    });
+    window.matchMedia('(min-width: 1024px)').addEventListener('change', function (mq) {
       if (mq.matches) setMenu(false);
     });
   }
@@ -103,19 +136,51 @@
   /* ---------- Header: bordo e ombra appena si scorre ---------- */
   var header = document.querySelector('[data-header]');
   var sentinel = document.querySelector('.top-sentinel');
-  if (header && sentinel && 'IntersectionObserver' in window) {
+  if (header && sentinel && hasIO) {
     new IntersectionObserver(function (entries) {
       header.classList.toggle('is-scrolled', !entries[0].isIntersecting);
     }).observe(sentinel);
   }
 
-  /* ---------- Comparsa allo scroll ---------- */
-  var reveals = document.querySelectorAll('[data-reveal]');
-  if (reduced || !('IntersectionObserver' in window)) {
-    reveals.forEach(function (el) {
-      el.classList.add('is-visible');
+  /* ---------- Voce del menu attiva mentre si scorre ---------- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__list a[href^="#"]'));
+  if (navLinks.length && hasIO) {
+    var byId = {};
+    navLinks.forEach(function (a) {
+      byId[a.getAttribute('href').slice(1)] = a;
+    });
+    var spy = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          // Sezioni senza voce di menu (hero compresa) spengono l'evidenziazione
+          navLinks.forEach(function (a) {
+            a.classList.remove('is-active');
+          });
+          if (en.target.id && byId[en.target.id]) byId[en.target.id].classList.add('is-active');
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    );
+    document.querySelectorAll('main > section').forEach(function (s) {
+      spy.observe(s);
+    });
+  }
+
+  /* ---------- Comparsa allo scroll, con ritardo a cascata tra elementi vicini ---------- */
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+  if (reduced || !hasIO) {
+    reveals.forEach(function (n) {
+      n.classList.add('is-visible');
     });
   } else {
+    reveals.forEach(function (n) {
+      var siblings = Array.prototype.filter.call(n.parentElement.children, function (c) {
+        return c.hasAttribute('data-reveal');
+      });
+      var i = siblings.indexOf(n);
+      if (i > 0) n.style.setProperty('--d', Math.min(i, 5) * 90 + 'ms');
+    });
     var io = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (en) {
@@ -127,32 +192,78 @@
       },
       { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
     );
-    reveals.forEach(function (el) {
-      io.observe(el);
+    reveals.forEach(function (n) {
+      io.observe(n);
     });
   }
 
-  /* ---------- Anteprime delle demo: l'iframe viene scalato alla larghezza della cornice ---------- */
-  var screens = document.querySelectorAll('[data-screen]');
-  var fit = function (screen) {
-    var frame = screen.querySelector('iframe');
-    if (!frame) return;
-    var w = frame.offsetWidth;
-    if (w) screen.style.setProperty('--scale', String(screen.clientWidth / w));
-  };
-  screens.forEach(fit);
-  if ('ResizeObserver' in window) {
-    var ro = new ResizeObserver(function (entries) {
-      entries.forEach(function (en) {
-        fit(en.target);
+  /* ---------- Linea del tempo del metodo ---------- */
+  document.querySelectorAll('[data-timeline]').forEach(function (line) {
+    var steps = Array.prototype.slice.call(line.querySelectorAll('.step'));
+    var last = steps.length - 1;
+    var accendi = function (upTo) {
+      steps.forEach(function (s, i) {
+        s.classList.toggle('is-on', i <= upTo);
       });
+      line.style.setProperty('--p', last > 0 ? String(Math.max(0, upTo) / last) : '1');
+    };
+    if (reduced || !hasIO) {
+      accendi(last);
+      return;
+    }
+    var massimo = -1;
+    var tio = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (en) {
+          var i = steps.indexOf(en.target);
+          if (en.isIntersecting && i > massimo) massimo = i;
+          // Tornando su, i passi sotto la metà dello schermo si spengono
+          if (!en.isIntersecting && en.boundingClientRect.top > 0 && i <= massimo) massimo = i - 1;
+        });
+        accendi(massimo);
+      },
+      { rootMargin: '0px 0px -45% 0px' }
+    );
+    steps.forEach(function (s) {
+      tio.observe(s);
     });
-    screens.forEach(function (s) {
-      ro.observe(s);
+  });
+
+  /* ---------- Hero: leggera profondità dei dispositivi seguendo il mouse ---------- */
+  var stage = document.querySelector('[data-parallax]');
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1024px)');
+  if (stage && !reduced && finePointer.matches) {
+    var layers = Array.prototype.slice.call(stage.querySelectorAll('[data-depth]'));
+    var area = stage.closest('section') || stage;
+    var target = { x: 0, y: 0 };
+    var pos = { x: 0, y: 0 };
+    var frame = 0;
+    var draw = function () {
+      pos.x += (target.x - pos.x) * 0.08;
+      pos.y += (target.y - pos.y) * 0.08;
+      layers.forEach(function (l) {
+        var d = parseFloat(l.getAttribute('data-depth')) || 0;
+        l.style.translate = (pos.x * d * 10).toFixed(2) + 'px ' + (pos.y * d * 8).toFixed(2) + 'px';
+      });
+      if (Math.abs(target.x - pos.x) > 0.001 || Math.abs(target.y - pos.y) > 0.001) {
+        frame = requestAnimationFrame(draw);
+      } else {
+        frame = 0;
+      }
+    };
+    var muovi = function () {
+      if (!frame) frame = requestAnimationFrame(draw);
+    };
+    area.addEventListener('pointermove', function (e) {
+      var r = stage.getBoundingClientRect();
+      target.x = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width / 2)));
+      target.y = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height / 2)));
+      muovi();
     });
-  } else {
-    window.addEventListener('resize', function () {
-      screens.forEach(fit);
+    area.addEventListener('pointerleave', function () {
+      target.x = 0;
+      target.y = 0;
+      muovi();
     });
   }
 
@@ -162,12 +273,8 @@
   if (reviewsBox && recensioni.length) {
     var list = reviewsBox.querySelector('[data-reviews-list]');
     recensioni.forEach(function (r) {
-      var li = document.createElement('li');
-      li.className = 'review';
       var stelle = Math.max(0, Math.min(5, Number(r.stelle) || 0));
-      var stars = document.createElement('p');
-      stars.className = 'review__stars';
-      stars.setAttribute('aria-label', stelle + ' stelle su 5');
+      var stars = el('p', { class: 'review__stars', role: 'img', 'aria-label': stelle + ' stelle su 5' });
       for (var i = 0; i < 5; i++) {
         var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         s.setAttribute('class', 'icon' + (i < stelle ? '' : ' is-empty'));
@@ -177,30 +284,15 @@
         s.appendChild(u);
         stars.appendChild(s);
       }
-      var testo = document.createElement('p');
-      testo.textContent = '«' + r.testo + '»';
-      var nome = document.createElement('p');
-      nome.className = 'review__name';
-      nome.textContent = r.nome;
-      if (r.attivita) {
-        var sm = document.createElement('small');
-        sm.textContent = r.attivita;
-        nome.appendChild(sm);
-      }
-      li.appendChild(stars);
-      li.appendChild(testo);
-      li.appendChild(nome);
-      if (r.link) {
-        var a = document.createElement('a');
-        a.href = r.link;
-        a.target = '_blank';
-        a.rel = 'noopener';
-        a.textContent = 'Leggi su Google';
-        li.appendChild(a);
+      var nome = el('p', { class: 'review__name', text: String(r.nome || '') });
+      if (r.attivita) nome.appendChild(el('small', { text: String(r.attivita) }));
+      var li = el('li', { class: 'review' }, [stars, el('p', { text: '«' + String(r.testo || '') + '»' }), nome]);
+      if (isHttps(r.link)) {
+        li.appendChild(el('a', { href: r.link, target: '_blank', rel: 'noopener', text: 'Leggi su Google' }));
       }
       list.appendChild(li);
     });
-    if (C.schedaGoogle) {
+    if (isHttps(C.schedaGoogle)) {
       var more = reviewsBox.querySelector('[data-reviews-more]');
       more.querySelector('a').href = C.schedaGoogle;
       more.hidden = false;
@@ -208,30 +300,45 @@
     reviewsBox.hidden = false;
   }
 
-  /* ---------- WhatsApp fisso: si nasconde quando i Contatti sono sullo schermo ---------- */
+  /* ---------- WhatsApp fisso: compare dopo la hero, si nasconde quando i Contatti sono sullo schermo ---------- */
   var waFloat = document.querySelector('[data-wa-float]');
   var contatti = document.getElementById('contatti');
-  if (waFloat && contatti && 'IntersectionObserver' in window) {
+  var heroCta = document.querySelector('.hero .btn-row');
+  if (waFloat && contatti && hasIO) {
+    var vista = { hero: !!heroCta, contatti: false };
+    var aggiorna = function () {
+      var nascosto = vista.hero || vista.contatti;
+      waFloat.classList.toggle('is-hidden', nascosto);
+      if (nascosto) waFloat.setAttribute('tabindex', '-1');
+      else waFloat.removeAttribute('tabindex');
+    };
+    aggiorna();
     new IntersectionObserver(
       function (entries) {
-        var visibile = entries[0].isIntersecting;
-        waFloat.classList.toggle('is-hidden', visibile);
-        if (visibile) waFloat.setAttribute('tabindex', '-1');
-        else waFloat.removeAttribute('tabindex');
+        vista.contatti = entries[0].isIntersecting;
+        aggiorna();
       },
       { threshold: 0.15 }
     ).observe(contatti);
+    if (heroCta) {
+      new IntersectionObserver(function (entries) {
+        vista.hero = entries[0].isIntersecting;
+        aggiorna();
+      }).observe(heroCta);
+    }
   }
 
   /* ---------- Modulo contatti ---------- */
   var form = document.querySelector('[data-contact-form]');
   if (!form) return;
 
-  // "Oppure con il modulo" dall'analisi gratuita: preseleziona il servizio
+  // Link che preselezionano il servizio nel modulo (es. data-servizio="Rifare il sito")
   document.querySelectorAll('[data-servizio]').forEach(function (a) {
     a.addEventListener('click', function () {
-      var r = form.querySelector('input[name="servizio"][value="' + a.getAttribute('data-servizio') + '"]');
-      if (r) r.checked = true;
+      var radios = form.querySelectorAll('input[name="servizio"]');
+      Array.prototype.forEach.call(radios, function (r) {
+        if (r.value === a.getAttribute('data-servizio')) r.checked = true;
+      });
     });
   });
 
@@ -250,12 +357,10 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
   };
 
+  // Solo due campi obbligatori: come chiamarvi e dove rispondervi
   var rules = {
     nome: function (v) {
       return v.trim().length < 2 ? 'Scrivete il vostro nome.' : '';
-    },
-    attivita: function (v) {
-      return v.trim().length < 2 ? 'Scrivete che attività avete.' : '';
     },
     contatto: function (v) {
       v = v.trim();
@@ -265,9 +370,6 @@
       return /^\+?[\d\s./-]+$/.test(v) && cifre >= 6 && cifre <= 15
         ? ''
         : 'Scrivete un numero di telefono (solo cifre, spazi e un + iniziale) oppure un indirizzo email.';
-    },
-    privacy: function (_, el) {
-      return el.checked ? '' : "Per inviare la richiesta serve l'ok all'informativa privacy.";
     }
   };
 
@@ -276,9 +378,9 @@
   };
 
   var setError = function (name, msg) {
-    var el = field(name);
-    var err = document.getElementById(el.id + '-err');
-    el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    var f = field(name);
+    var err = document.getElementById(f.id + '-err');
+    f.setAttribute('aria-invalid', msg ? 'true' : 'false');
     if (err) {
       err.textContent = msg;
       err.hidden = !msg;
@@ -286,25 +388,26 @@
   };
 
   var validate = function (name) {
-    var el = field(name);
-    return rules[name](el.value || '', el);
+    var f = field(name);
+    return rules[name](f.value || '', f);
   };
 
-  var show = function (html, type) {
-    status.innerHTML = html;
-    status.dataset.type = type || 'ok';
+  var show = function (nodes, type) {
+    while (status.firstChild) status.removeChild(status.firstChild);
+    nodes.forEach(function (n) {
+      status.appendChild(n);
+    });
+    status.setAttribute('data-type', type || 'ok');
     status.hidden = false;
     status.focus();
   };
 
   // Dopo il primo errore, il messaggio si aggiorna mentre si corregge
-  form.addEventListener('input', function (e) {
-    var name = e.target.name;
-    if (rules[name] && e.target.getAttribute('aria-invalid') === 'true') setError(name, validate(name));
-  });
-  form.addEventListener('change', function (e) {
-    var name = e.target.name;
-    if (rules[name] && e.target.getAttribute('aria-invalid') === 'true') setError(name, validate(name));
+  ['input', 'change'].forEach(function (evt) {
+    form.addEventListener(evt, function (e) {
+      var name = e.target.name;
+      if (rules[name] && e.target.getAttribute('aria-invalid') === 'true') setError(name, validate(name));
+    });
   });
   // Uscendo dal campo "Telefono o email" già compilato, l'errore compare subito
   field('contatto').addEventListener('blur', function () {
@@ -314,7 +417,7 @@
   var buildText = function (data) {
     return [
       'Nome: ' + data.get('nome'),
-      'Attività: ' + data.get('attivita'),
+      'Attività: ' + (data.get('attivita') || '-'),
       'Telefono o email: ' + data.get('contatto'),
       'Cosa serve: ' + (data.get('servizio') || '-'),
       '',
@@ -326,13 +429,16 @@
   var mailtoUrl = function (data) {
     return (
       'mailto:' + EMAIL +
-      '?subject=' + encodeURIComponent('Richiesta dal sito: ' + data.get('attivita')) +
+      '?subject=' + encodeURIComponent('Richiesta dal sito: ' + (data.get('attivita') || data.get('nome'))) +
       '&body=' + encodeURIComponent(buildText(data))
     );
   };
-  var waButton =
-    '<a class="btn btn--primary btn--sm" href="' + waLink('Ciao Next Siteo, vi ho appena scritto dal modulo del sito.') +
-    '" target="_blank" rel="noopener">Scriveteci su WhatsApp<span class="sr-only"> (si apre in una nuova scheda)</span></a>';
+  var waButton = function () {
+    return el('a', { class: 'btn btn--primary btn--sm', href: waLink('Ciao Next Siteo, vi ho appena scritto dal modulo del sito.'), target: '_blank', rel: 'noopener' }, [
+      'Scriveteci su WhatsApp',
+      el('span', { class: 'sr-only', text: ' (si apre in una nuova scheda)' })
+    ]);
+  };
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -346,7 +452,7 @@
     // Campo trappola compilato: è un robot, non inviamo nulla
     if (String(data.get('_gotcha') || '')) {
       form.reset();
-      show('Grazie! Vi rispondiamo al più presto.');
+      show([el('p', { text: 'Grazie! Vi rispondiamo al più presto.' })]);
       return;
     }
 
@@ -358,18 +464,14 @@
     });
 
     if (errors.length) {
-      summaryList.innerHTML = '';
+      while (summaryList.firstChild) summaryList.removeChild(summaryList.firstChild);
       errors.forEach(function (pair) {
-        var li = document.createElement('li');
-        var a = document.createElement('a');
-        a.href = '#' + field(pair[0]).id;
-        a.textContent = pair[1];
+        var a = el('a', { href: '#' + field(pair[0]).id, text: pair[1] });
         a.addEventListener('click', function (ev) {
           ev.preventDefault();
           field(pair[0]).focus();
         });
-        li.appendChild(a);
-        summaryList.appendChild(li);
+        summaryList.appendChild(el('li', {}, [a]));
       });
       summary.hidden = false;
       summary.focus();
@@ -380,10 +482,13 @@
     // Endpoint Formspree non configurato: si apre un'email già compilata
     if (!endpointReady) {
       window.location.href = mailtoUrl(data);
-      show(
-        'Vi abbiamo aperto un\'email già compilata: premete invio per mandarcela. ' +
-          'Se non si è aperto nulla, scriveteci a <a href="mailto:' + EMAIL + '">' + EMAIL + '</a>.'
-      );
+      show([
+        el('p', {}, [
+          'Vi abbiamo aperto un\'email già compilata: premete invio per mandarcela. Se non si è aperto nulla, scriveteci a ',
+          el('a', { href: 'mailto:' + EMAIL, text: EMAIL }),
+          '.'
+        ])
+      ]);
       return;
     }
 
@@ -395,17 +500,25 @@
         if (!res.ok) throw new Error(String(res.status));
         form.reset();
         if (fieldProvenienza) fieldProvenienza.value = provenienza;
-        show(
-          '<strong>Grazie, richiesta inviata!</strong> Vi ricontattiamo ' +
-            (RISPOSTA ? 'entro ' + RISPOSTA : 'al più presto') +
-            '. Se preferite, scriveteci subito su WhatsApp.<br>' + waButton
-        );
+        show([
+          el('p', {}, [
+            el('strong', { text: 'Grazie, richiesta inviata!' }),
+            ' Vi ricontattiamo ' + (RISPOSTA ? 'entro ' + RISPOSTA : 'al più presto') + '. Se preferite, scriveteci subito su WhatsApp.'
+          ]),
+          waButton()
+        ]);
       })
       .catch(function () {
         show(
-          '<strong>Invio non riuscito.</strong> Riprovate tra poco, oppure ' +
-            '<a href="' + mailtoUrl(data).replace(/"/g, '&quot;') + '">mandateci la richiesta per email</a> ' +
-            '(si apre già compilata) o scriveteci su WhatsApp.<br>' + waButton,
+          [
+            el('p', {}, [
+              el('strong', { text: 'Invio non riuscito.' }),
+              ' Riprovate tra poco, oppure ',
+              el('a', { href: mailtoUrl(data), text: 'mandateci la richiesta per email' }),
+              ' (si apre già compilata) o scriveteci su WhatsApp. I dati che avete scritto sono ancora nel modulo.'
+            ]),
+            waButton()
+          ],
           'error'
         );
       })
