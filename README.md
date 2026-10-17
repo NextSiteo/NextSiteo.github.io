@@ -9,17 +9,19 @@ Il sito di Next Siteo: siti web e strumenti digitali su misura per attività loc
 ## Cosa c'è nella cartella
 
 ```
-index.html            la home (servizi, lavori, metodo, FAQ, contatti)
+index.html            la home: per chi lavoriamo, problema e soluzione, lavori, analisi gratuita, metodo, FAQ, contatti
+autoscuole/           pagina per le autoscuole (da linkare nelle email): è anche il modello per le altre nicchie
 privacy.html          informativa privacy (con le parti [DA COMPLETARE])
 404.html              pagina per gli indirizzi sbagliati
 css/style.css         colori, caratteri e impaginazione
-js/main.js            menu, animazioni, anteprime e modulo contatti
+js/config.js          contatti, tempo di risposta, link al calendario, scheda Google e recensioni (un solo posto)
+js/main.js            menu, animazioni, anteprime, provenienza (?src=), recensioni, WhatsApp fisso e modulo contatti
 assets/               favicon, immagine di anteprima per WhatsApp, illustrazioni, font
 demo/
-  comune/            barra "Sito dimostrativo..." e avviso "Questa è una demo", per tutte le demo
+  comune/            barra "Sito dimostrativo..." con "Voglio un sito così" e la finestra "Questa è una demo di Next Siteo", per tutte le demo
   autoscuola-pistacchio/   demo moderna: pre-iscrizione a step, «Quale patente fa per te?», WhatsApp
-  autoscuola-ardesia/      demo classica: patenti, orari con «aperto ora», checklist dei documenti, domande frequenti, mappa disegnata
-  autoscuole-crocevia/     demo con gestionale: mappa delle sedi, area allievi con prenotazione delle guide, lavora con noi
+  autoscuola-ardesia/      demo classica: patenti e servizi, documenti da stampare, orari con «aperto ora», mappa disegnata
+  autoscuole-crocevia/     demo moderna a pagina unica: pre-iscrizione in cinque passaggi, quiz di teoria, FAQ, WhatsApp
 sitemap.xml           elenco delle pagine per Google
 robots.txt            istruzioni per i motori di ricerca
 .gitignore            file e cartelle da non pubblicare (impostazioni locali e design system di lavoro)
@@ -195,6 +197,27 @@ Per ogni file: aprite il file su GitHub, cliccate la **matita**, cercate `NOMEUT
 
 ---
 
+## 10. Pagine per nicchia, link nelle email e configurazione
+
+**Aggiungere una nicchia** (per esempio i barbieri):
+1. Copiate la cartella `autoscuole/` e chiamatela `barbieri/`.
+2. Nel nuovo `index.html` cambiate: `<title>`, meta description (al massimo 155 caratteri), `canonical`, `og:url`, `og:title`, `og:description`, il JSON-LD, `data-pagina="barbieri"` nel `<body>`, i problemi tipici, le demo, le FAQ (e il blocco FAQPage nel `<head>`: deve dire le stesse cose) e i messaggi WhatsApp (`data-wa="Ciao Next Siteo, ho visto la pagina per barbieri..."`).
+3. Nella home, nella sezione **Per chi lavoriamo**, copiate una card e fatela puntare a `barbieri/`.
+4. Aggiungete `https://nextsiteo.github.io/barbieri/` in `sitemap.xml`.
+Per i **saloni benessere** la card nella home è già pronta, dentro un commento: quando ci sono le demo, togliete il commento e create `saloni-benessere/` come sopra.
+
+**Link nelle email:** aggiungete `?src=` con un nome breve, per esempio `https://nextsiteo.github.io/autoscuole/?src=email-autoscuole`. Il nome finisce nel campo nascosto «provenienza» del modulo e in fondo ai messaggi WhatsApp (per esempio «[da: email-autoscuole · autoscuole]»), anche se la persona passa dalla home alle demo. Niente cookie: il parametro viaggia solo nei link.
+
+**`js/config.js`:**
+- `calendario`: incollate il link **pubblico** di una pagina di prenotazione (per esempio una «pagina di prenotazione» di Google Calendar, che inizia con `https://calendar.app.google/`). Il link della vista settimana del vostro calendario non va bene: chi lo apre vede solo una pagina di accesso. Con il link compilato, il pulsante «Richiedi un preventivo gratuito» dell'hero diventa «Prenotate una chiamata di 10 minuti».
+- `rispostaEntro`: il tempo di risposta del messaggio dopo l'invio del modulo. Se lo cambiate, cambiatelo anche nei testi della home e della pagina autoscuole (cercate «24-48 ore»).
+- `schedaGoogle`: il link alla scheda Google, quando esiste: compare nel footer.
+- `recensioni`: solo recensioni vere, copiate dalla scheda Google. Finché l'elenco è vuoto la sezione Recensioni non si vede.
+
+**Demo:** ogni pulsante finto (WhatsApp, chiama, email, indicazioni) e ogni modulo o pre-iscrizione apre la finestra «Questa è una demo di Next Siteo» con il link a WhatsApp di Next Siteo, che cita il nome della demo. È gestito da `demo/comune/barra-demo.js`: le nuove demo devono solo includerlo e mettere `data-demo-avviso` sui pulsanti finti.
+
+---
+
 ## Checklist prima di inviare le email
 
 - [ ] Il sito è online e si apre dall'indirizzo giusto, anche dal telefono.
@@ -211,7 +234,7 @@ Per ogni file: aprite il file su GitHub, cliccate la **matita**, cercate `NOMEUT
 
 ## Note tecniche
 
-- **Font:** Manrope (sito), Bricolage Grotesque e Figtree (demo Pistacchio), Newsreader e IBM Plex Sans (demo Ardesia), Overpass e Overpass Mono (demo Crocevia). Sono font di Google Fonts con licenza SIL Open Font License, scaricati e serviti dal sito stesso: il browser non contatta Google. Le licenze sono accanto ai file dei font.
+- **Font:** Manrope (sito), Bricolage Grotesque e Figtree (demo Pistacchio), caratteri di sistema per le demo Ardesia e Crocevia (non scaricano nulla). Manrope, Bricolage e Figtree sono font di Google Fonts con licenza SIL Open Font License, scaricati e serviti dal sito stesso: il browser non contatta Google. Le licenze sono accanto ai file dei font.
 - **Nessun cookie** e nessuno strumento di statistica: per questo non c'è il banner dei cookie. Se in futuro aggiungete Google Analytics o simili, servono banner e aggiornamento della privacy.
 - **Animazioni:** discrete, e disattivate per chi ha attivato "riduci movimento" nelle impostazioni del telefono o del computer.
 - **Accessibilità:** contrasti verificati, navigazione da tastiera, etichette nei moduli, testo alternativo per le immagini.

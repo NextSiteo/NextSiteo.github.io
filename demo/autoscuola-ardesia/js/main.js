@@ -1,299 +1,347 @@
 /* ==================================================================
    AUTOSCUOLA ARDESIA · demo di Next Siteo (attività di fantasia)
-   Menu mobile, stato "aperto ora", schede e checklist dei documenti,
-   mappa "come arrivi", modulo di richiamata. Nessuna libreria,
-   nessun dato inviato.
+   Menu, schede dei servizi, documenti da stampare, orari con
+   "Aperto ora", modulo "Chiedi informazioni". I contenuti arrivano
+   da js/dati.js. Nessun dato viene inviato.
    ================================================================== */
 (function () {
   'use strict';
 
+  var D = window.ARDESIA;
   var $ = function (sel, root) {
     return (root || document).querySelector(sel);
   };
   var $$ = function (sel, root) {
     return Array.prototype.slice.call((root || document).querySelectorAll(sel));
   };
+  var el = function (tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  var icon = function (id) {
+    var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    s.setAttribute('class', 'icon');
+    s.setAttribute('aria-hidden', 'true');
+    var u = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    u.setAttribute('href', '#' + id);
+    s.appendChild(u);
+    return s;
+  };
+  var avviso = function (msg) {
+    if (window.NextSiteoDemo) window.NextSiteoDemo.avviso(msg);
+  };
+  // Ora del dispositivo: tutta la logica degli orari passa da qui
+  var adesso = function () {
+    return new Date();
+  };
 
   /* ---------- Anno nel footer ---------- */
   $$('[data-year]').forEach(function (n) {
-    n.textContent = String(new Date().getFullYear());
+    n.textContent = String(adesso().getFullYear());
   });
 
   /* ---------- Menu mobile ---------- */
   var toggle = $('[data-menu-toggle]');
   var menu = $('[data-menu]');
-  if (toggle && menu) {
-    var setMenu = function (open) {
-      toggle.setAttribute('aria-expanded', String(open));
-      menu.hidden = !open;
-    };
-    toggle.addEventListener('click', function () {
-      setMenu(toggle.getAttribute('aria-expanded') !== 'true');
-    });
-    menu.addEventListener('click', function (e) {
-      if (e.target.closest('a')) setMenu(false);
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-        setMenu(false);
-        toggle.focus();
-      }
-    });
-  }
-
-  /* ---------- Orari: stato "aperto ora" calcolato sull'ora del visitatore ---------- */
-  // Fasce di apertura in minuti dalla mezzanotte (0 = domenica)
-  var ORARI = {
-    0: [],
-    1: [[540, 750], [930, 1140]],
-    2: [[540, 750], [930, 1140]],
-    3: [[540, 750], [930, 1140]],
-    4: [[540, 750], [930, 1140]],
-    5: [[540, 750], [930, 1140]],
-    6: [[540, 720]]
+  var setMenu = function (open) {
+    toggle.setAttribute('aria-expanded', String(open));
+    menu.hidden = !open;
   };
-  var GIORNI = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
+  toggle.addEventListener('click', function () {
+    setMenu(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+  menu.addEventListener('click', function (e) {
+    if (e.target.closest('a')) setMenu(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      toggle.focus();
+    }
+  });
 
+  /* ---------- Patenti e servizi: una scheda aperta alla volta ---------- */
+  var servicesBox = $('[data-services]');
+  D.servizi.forEach(function (s, i) {
+    var n = i + 1;
+    var id = 'servizio-' + n;
+    var li = el('li', 'service');
+    li.id = id;
+    var num = el('span', 'service__num', (n < 10 ? '0' : '') + n);
+    num.setAttribute('aria-hidden', 'true');
+    li.appendChild(num);
+    li.appendChild(el('h3', null, s.titolo));
+    li.appendChild(el('p', null, s.breve));
+
+    var btn = el('button', 'service__more');
+    btn.type = 'button';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', id + '-dettaglio');
+    btn.appendChild(document.createTextNode('Per saperne di più'));
+    btn.appendChild(el('span', 'sr-only', ': ' + s.titolo));
+    btn.appendChild(icon('i-chevron'));
+    li.appendChild(btn);
+
+    var detail = el('div', 'service__detail');
+    detail.id = id + '-dettaglio';
+    detail.hidden = true;
+    var dl = el('dl');
+    [['A chi serve', s.aChi], ['Come funziona', s.come], ['Cosa portare', s.portare]].forEach(function (row) {
+      var d = el('div');
+      d.appendChild(el('dt', null, row[0]));
+      d.appendChild(el('dd', null, row[1]));
+      dl.appendChild(d);
+    });
+    detail.appendChild(dl);
+    if (s.documenti) {
+      var link = el('a', 'link-arrow', 'Vedi l\'elenco dei documenti');
+      link.href = '#documenti';
+      link.dataset.doc = s.documenti;
+      link.appendChild(icon('i-arrow'));
+      detail.appendChild(link);
+    }
+    li.appendChild(detail);
+    servicesBox.appendChild(li);
+  });
+
+  var moreBtns = $$('.service__more', servicesBox);
+  moreBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      moreBtns.forEach(function (b) {
+        var on = b === btn && open;
+        b.setAttribute('aria-expanded', String(on));
+        document.getElementById(b.getAttribute('aria-controls')).hidden = !on;
+      });
+    });
+  });
+
+  /* ---------- Documenti per patente, con stampa ---------- */
+  var picker = $('[data-doc-picker]');
+  var listBox = $('[data-doc-list]');
+  D.documenti.forEach(function (d, i) {
+    var lab = el('label');
+    var input = el('input');
+    input.type = 'radio';
+    input.name = 'documenti';
+    input.value = d.id;
+    input.checked = d.id === 'b';
+    lab.appendChild(input);
+    lab.appendChild(el('span', null, d.nome));
+    picker.appendChild(lab);
+  });
+
+  function showDocs(id) {
+    var d = D.documenti.filter(function (x) { return x.id === id; })[0] || D.documenti[0];
+    $$('label', picker).forEach(function (l) {
+      var input = $('input', l);
+      input.checked = input.value === d.id;
+      l.classList.toggle('is-checked', input.checked);
+    });
+    listBox.innerHTML = '';
+    listBox.appendChild(el('h3', null, 'Documenti per: ' + d.nome));
+    listBox.appendChild(el('p', 'print-only', 'Autoscuola Ardesia · Via del Mercato 3, 00000 Vallefinta (XX) · elenco indicativo, da verificare in segreteria.'));
+    var ul = el('ul', 'checklist');
+    ul.setAttribute('role', 'list');
+    d.voci.forEach(function (v) {
+      var li = el('li');
+      li.appendChild(icon('i-box'));
+      li.appendChild(el('span', null, v));
+      ul.appendChild(li);
+    });
+    listBox.appendChild(ul);
+  }
+  picker.addEventListener('change', function (e) {
+    if (e.target.name === 'documenti') showDocs(e.target.value);
+  });
+  // Dai dettagli dei servizi: apre i documenti giusti
+  servicesBox.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-doc]');
+    if (a) showDocs(a.dataset.doc);
+  });
+  $('[data-print]').addEventListener('click', function () {
+    window.print();
+  });
+  showDocs('b');
+
+  /* ---------- Orari: tabella, "Aperto ora" e footer leggono gli stessi dati ---------- */
+  var ORDINE = [1, 2, 3, 4, 5, 6, 0];
   var hhmm = function (m) {
     return Math.floor(m / 60) + ':' + String(m % 60).padStart(2, '0');
+  };
+  var fascia = function (f) {
+    return hhmm(f[0]) + '-' + hhmm(f[1]);
   };
 
   function stato(now) {
     var day = now.getDay();
     var min = now.getHours() * 60 + now.getMinutes();
-    var oggi = ORARI[day];
+    var oggi = D.orari[day];
     for (var i = 0; i < oggi.length; i++) {
-      if (min >= oggi[i][0] && min < oggi[i][1]) {
-        return { open: true, text: 'Aperto ora · chiude alle ' + hhmm(oggi[i][1]) };
-      }
-      if (min < oggi[i][0]) {
-        return { open: false, text: 'Chiuso ora · riapre alle ' + hhmm(oggi[i][0]) };
-      }
+      if (min >= oggi[i][0] && min < oggi[i][1]) return { open: true, label: 'Aperto ora', resto: 'chiude alle ' + hhmm(oggi[i][1]) };
+      if (min < oggi[i][0]) return { open: false, label: 'Chiuso', resto: 'riapre alle ' + hhmm(oggi[i][0]) };
     }
-    for (var d = 1; d <= 7; d++) {
-      var next = ORARI[(day + d) % 7];
+    for (var g = 1; g <= 7; g++) {
+      var next = D.orari[(day + g) % 7];
       if (next.length) {
-        var quando = d === 1 ? 'domani' : GIORNI[(day + d) % 7];
-        return { open: false, text: 'Chiuso · riapre ' + quando + ' alle ' + hhmm(next[0][0]) };
+        var quando = g === 1 ? 'domani' : D.giorni[(day + g) % 7].toLowerCase();
+        return { open: false, label: 'Chiuso', resto: 'riapre ' + quando + ' alle ' + hhmm(next[0][0]) };
       }
     }
-    return { open: false, text: 'Chiuso' };
+    return { open: false, label: 'Chiuso', resto: '' };
   }
 
-  function aggiornaOrari() {
-    var now = new Date();
-    var s = stato(now);
-    $$('[data-status]').forEach(function (box) {
-      box.classList.toggle('is-open', s.open);
-      box.classList.toggle('is-closed', !s.open);
-      var t = $('[data-status-text]', box);
-      if (t) t.textContent = s.text;
+  var tbody = $('[data-hours]');
+  ORDINE.forEach(function (d) {
+    var tr = el('tr');
+    tr.dataset.day = String(d);
+    tr.appendChild(el('th', null, D.giorni[d])).setAttribute('scope', 'row');
+    var slots = D.orari[d];
+    var mattina = slots.filter(function (f) { return f[0] < 780; });
+    var pomeriggio = slots.filter(function (f) { return f[0] >= 780; });
+    [mattina, pomeriggio].forEach(function (list) {
+      var td = el('td', list.length ? null : 'closed', list.length ? list.map(fascia).join(', ') : 'Chiuso');
+      tr.appendChild(td);
     });
-    var oggi = ORARI[now.getDay()];
-    var hours = $('[data-today-hours]');
-    if (hours) {
-      hours.textContent = oggi.length
-        ? 'Oggi: ' + oggi.map(function (f) { return hhmm(f[0]) + '-' + hhmm(f[1]); }).join(' e ')
-        : 'Oggi la segreteria è chiusa.';
-    }
-    $$('[data-timetable] tr').forEach(function (row) {
-      var on = Number(row.dataset.day) === now.getDay();
-      row.classList.toggle('is-today', on);
-      var tag = $('.today-tag', row);
-      if (on && !tag) {
-        tag = document.createElement('span');
-        tag.className = 'today-tag';
-        tag.textContent = 'Oggi';
-        $('th', row).appendChild(tag);
-      } else if (!on && tag) {
-        tag.remove();
-      }
+    tbody.appendChild(tr);
+  });
+
+  // Footer: giorni consecutivi con gli stessi orari diventano una riga sola
+  var footerHours = $('[data-footer-hours]');
+  var gruppi = [];
+  ORDINE.forEach(function (d) {
+    var key = JSON.stringify(D.orari[d]);
+    var last = gruppi[gruppi.length - 1];
+    if (last && last.key === key) last.days.push(d);
+    else gruppi.push({ key: key, days: [d] });
+  });
+  gruppi.forEach(function (g) {
+    var first = D.giorni[g.days[0]];
+    var nome = g.days.length > 1 ? first + '-' + D.giorni[g.days[g.days.length - 1]].toLowerCase() : first;
+    var slots = D.orari[g.days[0]];
+    footerHours.appendChild(el('li', null, nome + ': ' + (slots.length ? slots.map(fascia).join(' e ') : 'chiuso')));
+  });
+
+  var statusBox = $('[data-status]');
+  var statusText = $('[data-status-text]');
+  function aggiornaOrari() {
+    var now = adesso();
+    var s = stato(now);
+    statusBox.classList.toggle('is-open', s.open);
+    statusBox.classList.toggle('is-closed', !s.open);
+    statusText.innerHTML = '';
+    statusText.appendChild(el('strong', null, s.label));
+    if (s.resto) statusText.appendChild(document.createTextNode(' · ' + s.resto));
+    $$('tr', tbody).forEach(function (tr) {
+      var on = Number(tr.dataset.day) === now.getDay();
+      tr.classList.toggle('is-today', on);
+      var tag = $('.today-tag', tr);
+      if (on && !tag) $('th', tr).appendChild(el('span', 'today-tag', 'Oggi'));
+      else if (!on && tag) tag.remove();
     });
   }
   aggiornaOrari();
   setInterval(aggiornaOrari, 60000);
 
-  /* ---------- Documenti: schede accessibili (frecce, Home, Fine) ---------- */
-  $$('[data-tabs]').forEach(function (box) {
-    var tabs = $$('[role="tab"]', box);
-    var select = function (tab, focus) {
-      tabs.forEach(function (t) {
-        var on = t === tab;
-        t.setAttribute('aria-selected', String(on));
-        t.tabIndex = on ? 0 : -1;
-        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-      });
-      if (focus) tab.focus();
-    };
-    tabs.forEach(function (t, i) {
-      t.addEventListener('click', function () {
-        select(t, false);
-      });
-      t.addEventListener('keydown', function (e) {
-        var n = null;
-        if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
-        if (e.key === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length];
-        if (e.key === 'Home') n = tabs[0];
-        if (e.key === 'End') n = tabs[tabs.length - 1];
-        if (n) {
-          e.preventDefault();
-          select(n, true);
-        }
-      });
-    });
+  /* ---------- Footer: elenco dei servizi ---------- */
+  var footerServices = $('[data-footer-services]');
+  D.servizi.forEach(function (s, i) {
+    var li = el('li');
+    var a = el('a', null, s.titolo);
+    a.href = '#servizio-' + (i + 1);
+    li.appendChild(a);
+    footerServices.appendChild(li);
   });
 
-  /* ---------- Documenti: checklist con avanzamento ---------- */
-  $$('[data-checklist]').forEach(function (panel) {
-    var boxes = $$('input[type="checkbox"]', panel);
-    var bar = $('[data-progress-bar]', panel);
-    var out = $('[data-progress]', panel);
-    var wrap = out.parentNode;
-    var update = function () {
-      var done = boxes.filter(function (b) { return b.checked; }).length;
-      var tot = boxes.length;
-      bar.style.transform = 'scaleX(' + done / tot + ')';
-      wrap.classList.toggle('is-done', done === tot);
-      if (done === 0) out.textContent = 'Spunta i documenti che hai già.';
-      else if (done === tot) out.textContent = 'Hai tutto: passa in segreteria negli orari di apertura.';
-      else out.textContent = done + ' di ' + tot + ' pronti. ' + (tot - done === 1 ? 'Manca un documento.' : 'Mancano ' + (tot - done) + ' documenti.');
-    };
-    boxes.forEach(function (b) {
-      b.addEventListener('change', update);
-    });
-  });
-  var print = $('[data-print]');
-  if (print) {
-    print.addEventListener('click', function () {
-      window.print();
-    });
-  }
-
-  /* ---------- Dove siamo: come arrivi ---------- */
-  var map = $('[data-map]');
-  var modes = $('[data-modes]');
-  if (map && modes) {
-    var setMode = function (mode) {
-      map.dataset.mode = mode;
-      $$('[data-route-text]').forEach(function (p) {
-        p.classList.toggle('is-active', p.dataset.routeText === mode);
-      });
-    };
-    modes.addEventListener('change', function (e) {
-      if (e.target.name === 'arrivo') setMode(e.target.value);
-    });
-    var checked = $('input[name="arrivo"]:checked', modes);
-    setMode(checked ? checked.value : 'piedi');
-
-    // Sul telefono la mappa si stringe sulla zona utile (stesse proporzioni: nessuno spostamento)
-    var svg = $('[data-map-svg]', map);
-    var narrow = window.matchMedia('(max-width: 599.98px)');
-    var crop = function () {
-      svg.setAttribute('viewBox', narrow.matches ? '88 70 480 300' : '0 0 640 400');
-    };
-    crop();
-    if (narrow.addEventListener) narrow.addEventListener('change', crop);
-  }
-
-  /* ---------- Contatti: validazione, riepilogo errori, stato finale ---------- */
+  /* ---------- Modulo "Chiedi informazioni" ---------- */
   var form = $('[data-form]');
-  if (form) {
-    var box = $('[data-errors]');
-    var boxList = $('[data-errors-list]');
-    var success = $('[data-success]');
-    var submit = $('[data-submit]');
+  var select = $('[data-service-select]');
+  D.servizi.map(function (s) { return s.titolo; }).concat(['Altro']).forEach(function (t) {
+    var o = el('option', null, t);
+    o.value = t;
+    select.appendChild(o);
+  });
 
-    var RULES = {
-      nome: function (v) {
-        return v.trim().length < 2 ? 'Scrivi nome e cognome.' : '';
-      },
-      telefono: function (v) {
-        v = v.trim();
-        if (!v) return 'Scrivi un numero di telefono: serve per richiamarti.';
-        var cifre = v.replace(/\D/g, '').length;
-        return !/^\+?[\d\s./-]+$/.test(v) || cifre < 6 || cifre > 15
-          ? 'Il numero non sembra valido: usa solo cifre, spazi o il + iniziale.'
-          : '';
-      },
-      privacy: function (v, el) {
-        return el.checked ? '' : 'Serve il tuo ok all\'informativa privacy.';
+  var RULES = {
+    nome: function () {
+      return form.elements.nome.value.trim().length < 2 ? 'Scrivi il tuo nome e cognome.' : '';
+    },
+    contatto: function () {
+      var v = form.elements.contatto.value.trim();
+      if (!v) return 'Scrivi un telefono o un\'email: ci serve per risponderti.';
+      if (v.indexOf('@') > -1) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? '' : 'L\'email non sembra corretta: controlla la @ e il punto.';
       }
-    };
+      var cifre = v.replace(/\D/g, '').length;
+      return /^\+?[\d\s./-]+$/.test(v) && cifre >= 6 && cifre <= 15 ? '' : 'Scrivi un numero di telefono valido oppure un indirizzo email.';
+    },
+    servizio: function () {
+      return form.elements.servizio.value ? '' : 'Scegli la patente o il servizio che ti interessa.';
+    },
+    privacy: function () {
+      return form.elements.privacy.checked ? '' : 'Serve la presa visione dell\'informativa privacy.';
+    }
+  };
+  var check = function (name) {
+    var f = form.elements[name];
+    var msg = RULES[name]();
+    var err = document.getElementById('c-' + name + '-err');
+    err.textContent = msg;
+    err.hidden = !msg;
+    if (msg) f.setAttribute('aria-invalid', 'true');
+    else f.removeAttribute('aria-invalid');
+    return msg;
+  };
+  // Controllo all'uscita dal campo (se è stato toccato) e mentre si corregge
+  Object.keys(RULES).forEach(function (name) {
+    var f = form.elements[name];
+    f.addEventListener(f.type === 'checkbox' || f.tagName === 'SELECT' ? 'change' : 'blur', function () {
+      if (f.type === 'checkbox' || f.tagName === 'SELECT' || f.value.trim() || f.hasAttribute('aria-invalid')) check(name);
+    });
+    f.addEventListener('input', function () {
+      if (f.hasAttribute('aria-invalid')) check(name);
+    });
+  });
 
-    var check = function (name) {
-      var el = form.elements[name];
-      var msg = RULES[name](el.value, el);
-      var err = document.getElementById(el.getAttribute('aria-describedby').split(' ').pop());
-      err.textContent = msg;
-      err.hidden = !msg;
-      if (msg) el.setAttribute('aria-invalid', 'true');
-      else el.removeAttribute('aria-invalid');
-      return msg;
-    };
-
-    // Controllo all'uscita dal campo, solo dopo che è stato toccato
+  var submit = $('[data-submit]');
+  var success = $('[data-success]');
+  var sending = false;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (sending) return; // il doppio clic non crea doppioni
+    var first = null;
     Object.keys(RULES).forEach(function (name) {
-      var el = form.elements[name];
-      el.addEventListener(el.type === 'checkbox' ? 'change' : 'blur', function () {
-        if (el.type === 'checkbox' || el.value.trim() || el.hasAttribute('aria-invalid')) check(name);
-      });
-      el.addEventListener('input', function () {
-        if (el.hasAttribute('aria-invalid')) check(name);
-      });
+      if (check(name) && !first) first = name;
     });
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var errors = [];
-      Object.keys(RULES).forEach(function (name) {
-        var msg = check(name);
-        if (msg) errors.push([name, msg]);
-      });
-      if (errors.length) {
-        boxList.innerHTML = '';
-        errors.forEach(function (er) {
-          var li = document.createElement('li');
-          var a = document.createElement('a');
-          var target = form.elements[er[0]];
-          a.href = '#' + target.id;
-          a.textContent = er[1];
-          a.addEventListener('click', function (ev) {
-            ev.preventDefault();
-            target.focus();
-          });
-          li.appendChild(a);
-          boxList.appendChild(li);
-        });
-        box.hidden = false;
-        box.focus();
-        return;
-      }
-      box.hidden = true;
-      submit.setAttribute('aria-busy', 'true');
-      submit.disabled = true;
-      submit.textContent = 'Un attimo…';
-      setTimeout(function () {
-        submit.removeAttribute('aria-busy');
-        submit.disabled = false;
-        submit.textContent = 'Chiedi di essere richiamato';
-        form.hidden = true;
-        success.hidden = false;
-        success.focus();
-        if (window.NextSiteoDemo) window.NextSiteoDemo.avviso('La richiesta non è stata inviata a nessuno: in un sito vero arriverebbe alla segreteria.');
-      }, 500);
+    if (first) {
+      form.elements[first].focus();
+      return;
+    }
+    sending = true;
+    submit.disabled = true;
+    submit.textContent = 'Un attimo…';
+    setTimeout(function () {
+      form.hidden = true;
+      success.hidden = false;
+      success.focus();
+      avviso('Nessun dato è stato inviato: la richiesta di informazioni è solo una simulazione.');
+    }, 500);
+  });
+  $('[data-again]').addEventListener('click', function () {
+    form.reset();
+    $$('[aria-invalid]', form).forEach(function (n) {
+      n.removeAttribute('aria-invalid');
     });
-
-    $('[data-again]').addEventListener('click', function () {
-      form.reset();
-      $$('[aria-invalid]', form).forEach(function (el) {
-        el.removeAttribute('aria-invalid');
-      });
-      $$('.field__error', form).forEach(function (el) {
-        el.hidden = true;
-      });
-      success.hidden = true;
-      form.hidden = false;
-      form.elements.nome.focus();
+    $$('.field__error', form).forEach(function (n) {
+      n.hidden = true;
     });
-  }
+    sending = false;
+    submit.disabled = false;
+    submit.textContent = 'Invia la richiesta';
+    success.hidden = true;
+    form.hidden = false;
+    form.elements.nome.focus();
+  });
 })();

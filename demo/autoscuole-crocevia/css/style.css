@@ -2,20 +2,11 @@
    AUTOSCUOLA CROCEVIA · demo di Next Siteo (attività di fantasia)
    Pagina unica, chiara e amichevole, pensata per il telefono.
    Indaco per le azioni, giallo semaforo solo per evidenziare.
-   Font: Plus Jakarta Sans (Google Fonts), 400 / 600 / 800.
+   Font di sistema: nessun carattere scaricato da altri siti.
    Contrasti (WCAG AA): testo/sfondo 16.9 · secondario/sfondo 7.9
    secondario/lavanda 7.5 · indaco/sfondo 5.9 · bianco/indaco 6.3
    testo/giallo 9.9 · verde/bianco 5.0 · rosso/bianco 6.5
    ================================================================== */
-
-/* Fallback con metriche vicine a Plus Jakarta Sans: meno salti mentre il font arriva */
-@font-face {
-  font-family: 'Jakarta Fallback';
-  src: local('Arial');
-  size-adjust: 104%;
-  ascent-override: 98%;
-  descent-override: 22%;
-}
 
 :root {
   /* colori */
@@ -37,7 +28,7 @@
   --c-err-soft: #fdecec;
 
   /* caratteri */
-  --font: 'Plus Jakarta Sans', 'Jakarta Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --fs-h1: clamp(2.5rem, 1.6rem + 4.4vw, 4.75rem);
   --fs-h2: clamp(1.9rem, 1.45rem + 2vw, 3rem);
   --fs-h3: 1.1875rem;
@@ -351,7 +342,7 @@ main:focus {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--c-muted);
-  margin-top: 3px;
+  margin-bottom: 3px;
 }
 .nav {
   display: none;
